@@ -39,3 +39,36 @@ if (mobileMenuBtn && mobileMenu) {
         });
     });
 }
+
+
+/* ÜYELİK DETAYLARI */
+
+const detailsButtons = document.querySelectorAll(".details-button");
+
+detailsButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const targetId = button.dataset.target;
+        const target = document.getElementById(targetId);
+
+        if (!target) return;
+
+        const isOpen = target.classList.contains("open");
+
+        document.querySelectorAll(".membership-details").forEach(detail => {
+            detail.classList.remove("open");
+        });
+
+        document.querySelectorAll(".details-button").forEach(btn => {
+            btn.textContent = "Detayları Gör";
+        });
+
+        if (!isOpen) {
+            target.classList.add("open");
+            button.textContent = "Detayları Gizle";
+        }
+
+    });
+
+});
