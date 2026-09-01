@@ -3,107 +3,425 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Endoria Network - Survival+ Minecraft sunucusu.">
-    <title>Endoria Network │ Survival+</title>
-    <link rel="stylesheet" href="style.css">
+
+    <title>Endoria Network | Survival+</title>
+
+    <meta
+        name="description"
+        content="Endoria Network - Yeni nesil Minecraft Survival+ deneyimi."
+    >
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
 
 <body>
 
-<header class="navbar">
-    <a href="index.html" class="brand">
-        <img src="logo.png" alt="Endoria Network">
-        <span>END0RIA NETWORK</span>
-    </a>
+<header class="header">
+    <div class="container nav-container">
 
-    <nav class="nav-menu">
-        <a href="index.html" class="active">Menü</a>
-        <a href="server.html">Sunucu & Discord</a>
-        <a href="memberships.html">Üyelikler</a>
-        <a href="contact.html">İletişim</a>
-        <a href="rules.html">Kurallar</a>
-        <a href="security.html">Güvenlik</a>
-    </nav>
+        <a href="index.html" class="brand">
+            <img src="logo.png" alt="Endoria Network">
+        </a>
 
-    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menüyü aç">
-        ☰
-    </button>
+        <nav class="desktop-nav">
+            <a href="index.html">Ana Sayfa</a>
+            <a href="#about">Hakkında</a>
+            <a href="#features">Özellikler</a>
+            <a href="#gallery">Galeri</a>
+            <a href="pages/market.html">Market</a>
+            <a href="pages/rules.html">Kurallar</a>
+            <a href="pages/security.html">Güvenlik</a>
+            <a href="pages/contact.html">İletişim</a>
+        </nav>
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            aria-label="Menüyü aç"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html">Ana Sayfa</a>
+        <a href="#about">Hakkında</a>
+        <a href="#features">Özellikler</a>
+        <a href="#gallery">Galeri</a>
+        <a href="pages/market.html">Market</a>
+        <a href="pages/rules.html">Kurallar</a>
+        <a href="pages/security.html">Güvenlik</a>
+        <a href="pages/contact.html">İletişim</a>
+    </div>
 </header>
 
-<div class="mobile-menu" id="mobileMenu">
-    <a href="index.html">Menü</a>
-    <a href="server.html">Sunucu & Discord</a>
-    <a href="memberships.html">Üyelikler</a>
-    <a href="contact.html">İletişim</a>
-    <a href="rules.html">Kurallar</a>
-    <a href="security.html">Güvenlik</a>
-</div>
 
 <main>
 
-<section class="hero">
+    <!-- HERO -->
+    <section class="hero section" id="home">
+        <div class="container hero-content">
 
-    <div class="hero-glow"></div>
-
-    <img
-        src="logo.png"
-        alt="Endoria Network Logo"
-        class="hero-logo"
-    >
-
-    <p class="hero-label">MINECRAFT SURVIVAL+</p>
-
-    <h1>ENDORIA NETWORK</h1>
-
-    <div class="slogan-container">
-        <p id="slogan">Hikâyenizi Birlikte Yazıyoruz.</p>
-    </div>
-
-    <div class="hero-cards">
-
-        <div class="info-card">
-            <span class="info-title">SUNUCU IP</span>
-
-            <strong>endorianetwork.skymc.io</strong>
-
-            <span class="status upcoming">
-                ● Yakında
-            </span>
-        </div>
-
-        <div class="info-card">
-            <span class="info-title">DISCORD</span>
-
-            <strong>Endoria Network</strong>
-
-            <a
-                href="https://discord.gg/mHngJ2s59"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="main-button"
+            <img
+                src="logo.png"
+                alt="Endoria Network"
+                class="hero-logo"
             >
-                Discord'a Katıl
-            </a>
+
+            <span class="hero-tag">SURVIVAL+</span>
+
+            <h1>Kendi Hikâyeni Yaz.</h1>
+
+            <p>
+                Endoria Network'te yeni nesil bir Survival+ deneyimine
+                adım at.
+            </p>
+
+            <div class="hero-actions">
+
+                <button class="ip-button" id="copyIpButton">
+                    <span id="ipText">
+                        EndoriaNetwork.aternos.me
+                    </span>
+                </button>
+
+                <a
+                    href="#about"
+                    class="button button-outline"
+                >
+                    Keşfet
+                </a>
+
+            </div>
+
         </div>
+    </section>
 
-    </div>
 
-    <div class="server-notice">
-        <span>●</span>
-        Sunucu şu anda bakım aşamasında.
-        <b>Sürüm yakında açıklanacak.</b>
-    </div>
+    <!-- SERVER STATUS -->
+    <section class="server-status section">
+        <div class="container">
 
-</section>
+            <div class="section-heading">
+                <span>ENDORIA NETWORK</span>
+                <h2>Sunucu Durumu</h2>
+            </div>
+
+            <div class="status-grid">
+
+                <div class="status-card">
+                    <span class="status-label">DURUM</span>
+
+                    <strong id="serverStatus">
+                        <i class="status-dot"></i>
+                        ONLINE
+                    </strong>
+                </div>
+
+                <div class="status-card">
+                    <span class="status-label">SÜRÜM</span>
+                    <strong>1.21.11+</strong>
+                </div>
+
+                <div class="status-card">
+                    <span class="status-label">PING</span>
+                    <strong id="visitorPing">
+                        Ölçülüyor...
+                    </strong>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ABOUT -->
+    <section class="about section" id="about">
+        <div class="container about-content">
+
+            <div class="section-heading">
+                <span>HAKKIMIZDA</span>
+                <h2>Endoria Network</h2>
+            </div>
+
+            <div class="about-text">
+
+                <h3>
+                    Bugün bir sunucu,
+                    yarın bir network.
+                </h3>
+
+                <p>
+                    Endoria Network, Survival+ deneyimini sürekli
+                    geliştirmeyi hedefleyen, büyüyen bir Minecraft
+                    projesidir.
+                </p>
+
+                <p>
+                    Şu anda gelişim sürecimizin ilk aşamalarındayız.
+                    Topluluğumuz büyüdükçe altyapımızı da güçlendirerek
+                    daha yüksek performans, daha iyi stabilite ve daha
+                    kaliteli bir oyun deneyimi sunmayı hedefliyoruz.
+                </p>
+
+                <div class="about-highlight">
+                    <strong>Sürekli gelişiyoruz.</strong>
+                    <span>Sürekli büyüyoruz.</span>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- FEATURES -->
+    <section class="features section" id="features">
+        <div class="container">
+
+            <div class="section-heading center">
+                <span>ENDORIA'YI FARKLI KILAN NE?</span>
+                <h2>Özellikler</h2>
+            </div>
+
+            <div class="feature-grid">
+
+                <article class="feature-card">
+                    <div class="feature-number">01</div>
+
+                    <h3>Survival+</h3>
+
+                    <p>
+                        Klasik Survival deneyimini özel sistemlerle
+                        geliştiren özgün bir oyun yapısı.
+                    </p>
+                </article>
+
+
+                <article class="feature-card">
+                    <div class="feature-number">02</div>
+
+                    <h3>Ekonomi</h3>
+
+                    <p>
+                        Oyuncuların gelişimini ve ticaretini destekleyen
+                        ekonomi sistemi.
+                    </p>
+                </article>
+
+
+                <article class="feature-card">
+                    <div class="feature-number">03</div>
+
+                    <h3>Özel Sistemler</h3>
+
+                    <p>
+                        Endoria'ya özel olarak geliştirilen oyun içi
+                        sistemler ve mekanikler.
+                    </p>
+                </article>
+
+
+                <article class="feature-card">
+                    <div class="feature-number">04</div>
+
+                    <h3>Etkinlikler</h3>
+
+                    <p>
+                        Toplulukla birlikte gerçekleştirilecek özel
+                        etkinlikler ve içerikler.
+                    </p>
+                </article>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- GALLERY -->
+    <section class="gallery section" id="gallery">
+        <div class="container">
+
+            <div class="section-heading center">
+                <span>ENDORIA'YI KEŞFET</span>
+                <h2>Galeri</h2>
+            </div>
+
+            <div class="gallery-placeholder">
+
+                <div class="coming-soon">
+
+                    <span>YAKINDA</span>
+
+                    <h3>
+                        Endoria dünyası hazırlanıyor.
+                    </h3>
+
+                    <p>
+                        Lobi ve diğer özel alanlardan görüntüler
+                        geliştirmeler tamamlandıkça burada yer alacak.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- QUICK LINKS -->
+    <section class="quick-links section">
+        <div class="container">
+
+            <div class="section-heading center">
+                <span>ENDORIA NETWORK</span>
+                <h2>Keşfet</h2>
+            </div>
+
+            <div class="quick-grid">
+
+                <a
+                    href="pages/market.html"
+                    class="quick-card"
+                >
+                    <span>01</span>
+                    <h3>Market</h3>
+                    <p>
+                        Özel eşyalar ve üyelikleri incele.
+                    </p>
+                    <strong>Görüntüle →</strong>
+                </a>
+
+
+                <a
+                    href="pages/rules.html"
+                    class="quick-card"
+                >
+                    <span>02</span>
+                    <h3>Kurallar</h3>
+                    <p>
+                        Endoria Network kurallarını incele.
+                    </p>
+                    <strong>Görüntüle →</strong>
+                </a>
+
+
+                <a
+                    href="pages/security.html"
+                    class="quick-card"
+                >
+                    <span>03</span>
+                    <h3>Güvenlik</h3>
+                    <p>
+                        Hesap ve topluluk güvenliği hakkında bilgi al.
+                    </p>
+                    <strong>Görüntüle →</strong>
+                </a>
+
+
+                <a
+                    href="pages/contact.html"
+                    class="quick-card"
+                >
+                    <span>04</span>
+                    <h3>İletişim</h3>
+                    <p>
+                        Endoria Network ile iletişime geç.
+                    </p>
+                    <strong>Görüntüle →</strong>
+                </a>
+
+            </div>
+
+        </div>
+    </section>
 
 </main>
 
-<footer>
-    <p>© 2026 Endoria Network — Tüm Hakları Saklıdır.</p>
-    <p>Bu sitede yer alan yazılı ve görsel içerikler izinsiz kopyalanamaz veya yeniden yayımlanamaz.</p>
+
+<!-- FOOTER -->
+<footer class="footer">
+
+    <div class="container footer-content">
+
+        <div class="footer-brand">
+
+            <img
+                src="logo.png"
+                alt="Endoria Network"
+            >
+
+            <p>
+                Survival'ın yeni çağını keşfet.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="index.html">
+                Ana Sayfa
+            </a>
+
+            <a href="#about">
+                Hakkında
+            </a>
+
+            <a href="#features">
+                Özellikler
+            </a>
+
+            <a href="#gallery">
+                Galeri
+            </a>
+
+            <a href="pages/market.html">
+                Market
+            </a>
+
+            <a href="pages/rules.html">
+                Kurallar
+            </a>
+
+            <a href="pages/security.html">
+                Güvenlik
+            </a>
+
+            <a href="pages/contact.html">
+                İletişim
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="container footer-bottom">
+
+        <span>
+            © 2026 Endoria Network
+        </span>
+
+        <span>
+            Tüm Hakları Saklıdır.
+        </span>
+
+    </div>
+
 </footer>
 
-<script src="script.js"></script>
+
+<script src="js/main.js"></script>
+<script src="js/copy-ip.js"></script>
+<script src="js/server-status.js"></script>
 
 </body>
 </html>

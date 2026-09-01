@@ -1,0 +1,106 @@
+/* =========================================
+   ENDORIA NETWORK - RESPONSIVE
+   ========================================= */
+
+@media (max-width: 1000px) {
+
+    .desktop-nav {
+        display: none;
+    }
+
+    .menu-button {
+        display: block;
+    }
+
+    .mobile-menu.active {
+        display: block;
+    }
+
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .container {
+        width: min(100% - 28px, var(--container));
+    }
+
+    .section {
+        padding: 75px 0;
+    }
+
+    .hero {
+        min-height: 90vh;
+        padding-top: 110px;
+    }
+
+    .hero h1 {
+        font-size: clamp(40px, 12vw, 60px);
+        letter-spacing: -2px;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .button,
+    .ip-button {
+        width: 100%;
+    }
+
+    .status-grid,
+    .feature-grid,
+    .market-grid,
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .community-box {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .footer-content {
+        flex-direction: column;
+    }
+
+    .footer-links {
+        justify-content: flex-start;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+
+@media (max-width: 420px) {
+
+    .hero-logo {
+        width: 190px;
+    }
+
+    .section-heading h2 {
+        font-size: 34px;
+    }
+
+    .feature-card,
+    .contact-card,
+    .status-card,
+    .product-info {
+        padding: 24px;
+    }
+
+    .community-box {
+        padding: 25px;
+    }
+}
