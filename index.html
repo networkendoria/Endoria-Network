@@ -1,0 +1,522 @@
+<title>Endoria Network</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Syncopate:wght@400;700&display=swap">
+<style>
+/* Layout: tek sayfa, siyah zemin, ortada hizalı değil sola yaslı büyük başlık; logo sağda mor hale içinde.
+   Palet: siyah, kırık beyaz, tek mor vurgu. */
+:root {
+  --bg: #07070a;
+  --bg-raised: #0e0e13;
+  --line: #22222b;
+  --fg: #f2f1f6;
+  --fg-dim: #9a98a8;
+  --purple: #8b5cf6;
+  --purple-soft: #b79dff;
+  --purple-deep: #3b1f7a;
+  --font-display: "Syncopate", "Arial Narrow", sans-serif;
+  --font-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; }
+img { max-width: 100%; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 2px solid var(--purple-soft); outline-offset: 3px; }
+
+.wrap {
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* Üst menü */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--bg); }
+.nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
+.brand { display: flex; align-items: center; gap: 12px; font-family: var(--font-display); font-weight: 700; font-size: 12px; letter-spacing: .22em; text-transform: uppercase; }
+.brand img { width: 34px; height: 34px; object-fit: cover; object-position: center 48%; mix-blend-mode: screen; }
+.nav ul { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
+.nav ul a { font-size: 13px; letter-spacing: .08em; color: var(--fg-dim); transition: color .2s; }
+.nav ul a:hover { color: var(--fg); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 12px 22px; font: 600 14px/1 var(--font-body); letter-spacing: .04em;
+  border: 1px solid var(--purple); background: var(--purple); color: #fff; cursor: pointer;
+  transition: background .2s, border-color .2s, transform .2s;
+}
+.btn:hover { background: #9d75f8; border-color: #9d75f8; }
+.btn.ghost { background: transparent; color: var(--fg); border-color: var(--line); }
+.btn.ghost:hover { border-color: var(--purple-soft); background: transparent; }
+.btn.small { padding: 10px 16px; font-size: 13px; }
+
+/* Hero */
+.hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); }
+.hero .wrap { display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; padding-block: 72px 80px; }
+.hero > .wrap > * { min-width: 0; }
+.eyebrow { font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: var(--purple-soft); font-weight: 600; margin: 0 0 20px; }
+h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(34px, 6.4vw, 76px); line-height: 1.02; letter-spacing: .02em; text-transform: uppercase; margin: 0 0 24px; text-wrap: balance; }
+h1 span { color: var(--purple); }
+.lead { max-width: 46ch; color: var(--fg-dim); font-size: 18px; margin: 0 0 32px; }
+.ip-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: stretch; }
+.ip {
+  display: flex; align-items: center; gap: 14px; padding: 6px 6px 6px 18px;
+  border: 1px solid var(--line); background: var(--bg-raised); min-width: 0;
+}
+.ip small { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--fg-dim); }
+.ip code { font: 600 15px/1 ui-monospace, "SF Mono", Menlo, Consolas, monospace; color: var(--fg); overflow-wrap: anywhere; }
+.hero-art { position: relative; display: grid; place-items: center; }
+.hero-art::before {
+  content: ""; position: absolute; width: 86%; aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle, rgba(139,92,246,.42), rgba(139,92,246,0) 68%);
+  filter: blur(18px);
+}
+.hero-art img { position: relative; width: min(100%, 420px); aspect-ratio: 1; object-fit: cover; object-position: center 48%; mix-blend-mode: screen; }
+
+/* Bölümler */
+section { padding-block: 88px; border-bottom: 1px solid var(--line); }
+section > .wrap > * { min-width: 0; }
+.head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px 40px; margin-bottom: 44px; }
+h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(22px, 3.4vw, 36px); letter-spacing: .06em; text-transform: uppercase; margin: 0; text-wrap: balance; }
+.head p { margin: 0; max-width: 44ch; color: var(--fg-dim); }
+
+/* Sunucu */
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
+.fact { padding: 28px 28px 28px 0; border-bottom: 1px solid var(--line); }
+.fact + .fact { padding-left: 28px; border-left: 1px solid var(--line); }
+.fact dt { font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--purple-soft); margin-bottom: 10px; font-weight: 600; }
+.fact dd { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: clamp(16px, 2.2vw, 22px); letter-spacing: .04em; text-transform: uppercase; overflow-wrap: anywhere; }
+
+/* Mağaza */
+.store { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; }
+.store > * { min-width: 0; }
+.store h3 { font-size: 12px; letter-spacing: .24em; text-transform: uppercase; color: var(--purple-soft); margin: 0 0 18px; font-weight: 600; }
+.ranks { display: grid; gap: 14px; }
+.rank { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 24px 26px; border: 1px solid var(--line); background: var(--bg-raised); transition: border-color .2s; }
+.rank:hover { border-color: var(--purple); }
+.rank .n { font-family: var(--font-display); font-weight: 700; font-size: clamp(18px, 2.6vw, 26px); letter-spacing: .06em; text-transform: uppercase; }
+.price { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 22px; white-space: nowrap; }
+.price small { font-size: 13px; color: var(--fg-dim); font-weight: 600; margin-left: 4px; }
+.rank.top { border-color: var(--purple); background: linear-gradient(135deg, rgba(139,92,246,.18), var(--bg-raised) 60%); }
+.rank.top .price { color: var(--purple-soft); }
+.spawn { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.spawn li { display: flex; justify-content: space-between; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.spawn .price { font-size: 17px; }
+.spawn .nm { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.egg { flex: none; display: block; width: 30px; height: 35px; }
+.egg svg { display: block; width: 100%; height: 100%; shape-rendering: crispEdges; }
+.buy-note { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; padding: 22px 26px; border: 1px solid var(--line); }
+.buy-note p { margin: 0; color: var(--fg-dim); flex: 1 1 280px; }
+
+/* Kurallar */
+.rules-meta { display: flex; flex-wrap: wrap; gap: 8px 28px; color: var(--fg-dim); font-size: 14px; margin-bottom: 28px; }
+.rules-meta b { color: var(--fg); font-weight: 600; }
+details { border-top: 1px solid var(--line); }
+details:last-of-type { border-bottom: 1px solid var(--line); }
+summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 18px; padding: 22px 4px; font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; }
+summary::-webkit-details-marker { display: none; }
+summary .k { color: var(--purple); font-variant-numeric: tabular-nums; min-width: 2ch; }
+summary::after { content: "+"; margin-left: auto; font: 400 24px/1 var(--font-body); color: var(--fg-dim); transition: transform .25s, color .25s; }
+details[open] summary::after { transform: rotate(45deg); color: var(--purple-soft); }
+summary:hover { color: var(--purple-soft); }
+details ol, details ul { margin: 0; padding: 0 4px 26px 4px; list-style: none; counter-reset: r; display: grid; gap: 10px; }
+details ol li { counter-increment: r; display: grid; grid-template-columns: 2.6ch 1fr; gap: 12px; color: #d3d1de; }
+details ol li::before { content: counter(r) "."; color: var(--purple-soft); font-variant-numeric: tabular-nums; }
+details ul li { color: #d3d1de; padding-left: 16px; position: relative; }
+details ul li::before { content: ""; position: absolute; left: 0; top: .7em; width: 6px; height: 6px; background: var(--purple); }
+.rule-intro { padding: 0 4px 14px; margin: 0; color: var(--fg-dim); }
+.important { margin: 0 4px 26px; padding: 16px 18px; border: 1px solid var(--purple-deep); background: rgba(139,92,246,.08); color: var(--fg); font-size: 15px; }
+.important b { color: var(--purple-soft); letter-spacing: .12em; font-size: 12px; margin-right: 8px; }
+.rule-outro { padding: 0 4px 26px; margin: 0; color: var(--fg-dim); }
+
+/* Ekip */
+.team { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: 760px; }
+.member { display: flex; align-items: center; gap: 20px; padding: 26px; border: 1px solid var(--line); background: var(--bg-raised); }
+.avatar { flex: none; width: 76px; height: 76px; border: 1px solid var(--purple); background: var(--bg); overflow: hidden; }
+.avatar img { display: block; width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; }
+.member b { display: block; font-size: 19px; overflow-wrap: anywhere; }
+.member span { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--purple-soft); font-weight: 600; }
+
+/* İletişim */
+.contact { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.c { display: flex; flex-direction: column; gap: 6px; padding: 26px; border: 1px solid var(--line); background: var(--bg-raised); transition: border-color .2s; min-width: 0; }
+a.c:hover { border-color: var(--purple); }
+.c small { font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--purple-soft); font-weight: 600; }
+.c b { font-size: 17px; overflow-wrap: anywhere; font-weight: 600; }
+.c em { font-style: normal; color: var(--fg-dim); font-size: 14px; }
+.copy-line { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.copy-line .btn { margin-top: 10px; }
+
+.nav .left { display: flex; align-items: center; gap: 18px; min-width: 0; }
+
+/* Giriş penceresi */
+.modal { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 16px; background: rgba(4,4,8,.78); backdrop-filter: blur(6px); }
+.modal-box { position: relative; width: min(100%, 400px); padding: 56px 32px 48px; border: 1px solid var(--purple); background: var(--bg-raised); box-shadow: 0 0 80px rgba(139,92,246,.28); text-align: center; }
+.modal-box .eyebrow { margin-bottom: 14px; }
+.modal-box h3 { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: clamp(26px, 6vw, 34px); letter-spacing: .08em; text-transform: uppercase; }
+.modal-x { position: absolute; top: 12px; right: 12px; width: 40px; height: 40px; display: grid; place-items: center; background: transparent; border: 1px solid var(--line); color: var(--fg-dim); cursor: pointer; transition: color .2s, border-color .2s; }
+.modal-x:hover { color: var(--fg); border-color: var(--purple-soft); }
+
+footer { padding-block: 40px; color: var(--fg-dim); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; }
+footer .legal { flex: 1 1 100%; margin: 8px 0 0; padding-top: 20px; border-top: 1px solid var(--line); font-size: 12.5px; line-height: 1.7; max-width: 80ch; }
+
+@media (max-width: 860px) {
+  .nav ul { display: none; }
+  .hero .wrap { grid-template-columns: 1fr; gap: 24px; padding-block: 48px 56px; }
+  .hero-art { order: -1; justify-self: start; width: min(62%, 260px); }
+  .store { grid-template-columns: 1fr; gap: 40px; }
+  .contact { grid-template-columns: 1fr; }
+  section { padding-block: 64px; }
+}
+@media (max-width: 620px) {
+  .facts { grid-template-columns: 1fr; }
+  .fact, .fact + .fact { padding: 22px 0; border-left: 0; }
+  .team { grid-template-columns: 1fr; }
+  .nav .nav-discord { display: none; }
+  .ip { width: 100%; justify-content: space-between; }
+  .rank { padding: 20px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+</style>
+
+<header class="nav">
+  <div class="wrap">
+    <div class="left">
+      <button class="btn ghost small" id="login-open" type="button"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" fill="none" stroke="currentColor" stroke-width="2"/></svg>Giriş Yap</button>
+      <a class="brand" href="#top" aria-label="Endoria Network ana sayfa">
+        <img src="logo.jpg" alt="">
+        <span>Endoria</span>
+      </a>
+    </div>
+    <ul>
+      <li><a href="#sunucu">Sunucu</a></li>
+      <li><a href="#magaza">Mağaza</a></li>
+      <li><a href="#kurallar">Kurallar</a></li>
+      <li><a href="#ekip">Ekip</a></li>
+      <li><a href="#iletisim">İletişim</a></li>
+    </ul>
+    <a class="btn small nav-discord" href="https://discord.gg/8kB8bu6dHQ" target="_blank" rel="noopener">Discord'a Katıl</a>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Resmî Survival SMP</p>
+        <h1>Endoria <span>Network</span></h1>
+        <p class="lead">Adil kurallar, güçlü bir topluluk ve 1.8'den 26.2'ye kadar her sürümden katılım. Kendi hikâyeni Endoria'da yaz.</p>
+        <div class="ip-row">
+          <div class="ip">
+            <div><small>Sunucu IP</small><br><code id="ip-text">IP adresi yakında</code></div>
+            <button class="btn small" id="ip-copy" type="button">Kopyala</button>
+          </div>
+          <a class="btn ghost" href="https://discord.gg/8kB8bu6dHQ" target="_blank" rel="noopener">Discord</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <img src="logo.jpg" alt="Endoria Network logosu: daire içinde bir kristal">
+      </div>
+    </div>
+  </div>
+
+  <section id="sunucu">
+    <div class="wrap">
+      <div class="head">
+        <h2>Sunucu</h2>
+        <p>Endoria Network, kuralları net ve oyunu adil tutan bir Survival SMP sunucusudur.</p>
+      </div>
+      <dl class="facts">
+        <div class="fact"><dt>Oyun Türü</dt><dd>Survival SMP</dd></div>
+        <div class="fact"><dt>Sürüm Desteği</dt><dd>1.8+ – 26.2</dd></div>
+        <div class="fact"><dt>Kurucu</dt><dd>Zyven</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section id="magaza">
+    <div class="wrap">
+      <div class="head">
+        <h2>Mağaza</h2>
+        <p>Fiyatlar Türk lirası cinsindendir.</p>
+      </div>
+      <div class="store">
+        <div>
+          <h3>Rütbeler</h3>
+          <div class="ranks">
+            <div class="rank"><span class="n">VIP</span><span class="price">25<small>TL</small></span></div>
+            <div class="rank"><span class="n">EVIP</span><span class="price">50<small>TL</small></span></div>
+            <div class="rank top"><span class="n">Destekçi</span><span class="price">70<small>TL</small></span></div>
+          </div>
+        </div>
+        <div>
+          <h3>Spawnerlar</h3>
+          <ul class="spawn">
+            <li><span class="nm"><i class="egg" data-b="#c9c9c9" data-s="#4a4a4a"></i>İskelet Spawner</span><span class="price">20<small>TL</small></span></li>
+            <li><span class="nm"><i class="egg" data-b="#2fb82b" data-s="#0b0b0b"></i>Creeper Spawner</span><span class="price">20<small>TL</small></span></li>
+            <li><span class="nm"><i class="egg" data-b="#f2a7a3" data-s="#d8605b"></i>Domuz Spawner</span><span class="price">20<small>TL</small></span></li>
+            <li><span class="nm"><i class="egg" data-b="#f6b201" data-s="#fff04d"></i>Blaze Spawner</span><span class="price">20<small>TL</small></span></li>
+            <li><span class="nm"><i class="egg" data-b="#4a3a28" data-s="#b5b5b5"></i>İnek Spawner</span><span class="price">20<small>TL</small></span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="buy-note">
+        <p>Satın almak için Discord sunucumuza gel ve yetkililere ulaş.</p>
+        <a class="btn" href="https://discord.gg/8kB8bu6dHQ" target="_blank" rel="noopener">Discord'a Git</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="kurallar">
+    <div class="wrap">
+      <div class="head">
+        <h2>Sunucu Kuralları</h2>
+        <p>Sunucuya katılan herkesin kuralları okuması ve takip etmesi beklenir.</p>
+      </div>
+      <div class="rules-meta">
+        <span>Kurucu: <b>Zyven</b></span>
+        <span>Tür: <b>Survival SMP</b></span>
+        <span>Sürüm: <b>1.8+ – 26.2</b></span>
+      </div>
+
+      <details open>
+        <summary><span class="k">1</span>Genel Kurallar</summary>
+        <ol>
+          <li>Sunucudaki herkes kurallara uymak zorundadır.</li>
+          <li>Diğer oyunculara hakaret etmek, tehdit etmek veya tacizde bulunmak yasaktır.</li>
+          <li>Sunucunun sistemlerini kötüye kullanmak ve oyun deneyimini kasıtlı olarak bozmak yasaktır.</li>
+          <li>Oyuncular kendi eşyalarından, kaynaklarından ve yaptıkları ticaretlerden sorumludur.</li>
+          <li>Kuralları bilmemek, ihlaller için mazeret sayılmaz.</li>
+        </ol>
+      </details>
+
+      <details>
+        <summary><span class="k">2</span>Hile ve Haksız Avantaj</summary>
+        <ol>
+          <li>KillAura, Reach, Fly, Speed, X-Ray ve benzeri hileler yasaktır.</li>
+          <li>Haksız avantaj sağlayan otomasyon araçları ve makrolar yasaktır.</li>
+          <li>Performans artıran, haksız avantaj sağlamayan modlara izin verilir.</li>
+          <li>Oyun açıklarını kullanarak eşya veya kaynak çoğaltmak yasaktır.</li>
+          <li>Hile kullanımı, ihlalin ağırlığına göre geçici veya kalıcı banla sonuçlanabilir.</li>
+        </ol>
+      </details>
+
+      <details>
+        <summary><span class="k">3</span>Sohbet ve Davranış</summary>
+        <ol>
+          <li>Spam ve mesaj tekrarı yasaktır.</li>
+          <li>Ağır hakaret, tehdit, taciz ve ayrımcı söylemler yasaktır.</li>
+          <li>Başka oyuncuları sürekli rahatsız etmek ve hedef göstermek yasaktır.</li>
+          <li>Yetkililere ve oyunculara saygılı davranılmalıdır.</li>
+          <li>Başka Minecraft sunucularının reklamını izinsiz yapmak yasaktır.</li>
+        </ol>
+      </details>
+
+      <details>
+        <summary><span class="k">4</span>Ticaret ve Dolandırıcılık</summary>
+        <p class="rule-intro">Endoria Network'te her oyuncu kendi ticaretinden sorumludur. Tanımadığınız oyunculara körü körüne güvenmeyin.</p>
+        <ol>
+          <li>Tanımadığınız oyunculara değerli eşyalarınızı veya kaynaklarınızı emanet etmeyin.</li>
+          <li>Karşılığını almadan eşya göndermek, borç vermek veya ödünç eşya teslim etmek tamamen kendi riskinizdedir.</li>
+          <li>Ticaret yaparken karşı tarafın güvenilir olduğunu varsaymayın. Mümkünse takas işlemlerini karşılıklı ve eş zamanlı gerçekleştirin.</li>
+          <li>Bir oyuncunun söz vermesi, eşyanızı geri vereceği veya ödeme yapacağı anlamına gelmez.</li>
+          <li>Oyuncular arasındaki borç, ödünç eşya ve sözlü anlaşmazlıklarda yönetim müdahale veya iade garantisi vermez.</li>
+          <li>Başka bir oyuncuyu kandırarak eşyasını veya kaynağını almak, planlı dolandırıcılık yapmak yasaktır.</li>
+          <li>Yönetim, dolandırıcılık iddialarını mevcut kanıtlara göre değerlendirebilir. Ancak her kayıp eşyanın geri verileceği garanti edilmez.</li>
+          <li>Ticaret yapmadan önce karşı tarafı tanımaya çalışın ve değerli eşyalarınızı riske atmayın.</li>
+          <li>Gerçek para karşılığında yapılan oyuncu ticaretlerinde yönetim, önceden açıkça belirtilmiş kurallar dışında güvence sağlamaz.</li>
+          <li>Ticaretle ilgili anlaşmazlıklarda ekran görüntüsü ve video gibi kanıtlar faydalı olabilir.</li>
+        </ol>
+        <p class="important"><b>ÖNEMLİ</b>Yönetim, oyuncular arasındaki her anlaşmanın garantörü değildir. Kendi kararlarınızla yaptığınız ticaretlerde dikkatli olun.</p>
+      </details>
+
+      <details>
+        <summary><span class="k">5</span>SMP ve Survival</summary>
+        <ol>
+          <li>Başka oyuncuların yapılarına ve arazilerine izinsiz zarar vermek yasaktır.</li>
+          <li>Başka oyuncuların eşyalarını izinsiz almak yasaktır.</li>
+          <li>Sandıkları ve depoları izinsiz yağmalamak yasaktır.</li>
+          <li>Oyuncuların yapılarını kasıtlı olarak tahrip etmek yasaktır.</li>
+          <li>Hata ve açıkları kullanarak başka oyuncuların eşyalarını ele geçirmek yasaktır.</li>
+          <li>Oyuncular kendi yapılarını ve değerli eşyalarını korumak için gerekli önlemleri almalıdır.</li>
+        </ol>
+      </details>
+
+      <details>
+        <summary><span class="k">6</span>PvP ve Rekabet</summary>
+        <ol>
+          <li>Hile kullanarak PvP yapmak yasaktır.</li>
+          <li>PvP sırasında haksız avantaj sağlayan açıkları kullanmak yasaktır.</li>
+          <li>Sunucunun PvP mekaniklerini bozacak yöntemler yasaktır.</li>
+          <li>PvP nedeniyle yaşanan her eşya kaybı otomatik olarak yönetimin sorumluluğunda değildir.</li>
+        </ol>
+      </details>
+
+      <details>
+        <summary><span class="k">7</span>Hata ve Açıklar</summary>
+        <ol>
+          <li>Sunucuda bulunan ciddi hatalar yetkililere bildirilmelidir.</li>
+          <li>Eşya veya kaynak çoğaltmak için açıkları kullanmak yasaktır.</li>
+          <li>Sunucu ekonomisini veya oyun sistemlerini bozacak istismarlar yasaktır.</li>
+          <li>Açıkları kullanarak diğer oyunculara zarar vermek ağır cezaya neden olabilir.</li>
+        </ol>
+      </details>
+
+      <details>
+        <summary><span class="k">8</span>Hesap Güvenliği</summary>
+        <ol>
+          <li>Başka oyuncuların hesaplarına izinsiz erişmeye çalışmak yasaktır.</li>
+          <li>Sahte yetkili kimliğiyle oyuncuları kandırmak yasaktır.</li>
+          <li>Hesap bilgilerinizi başka oyuncularla paylaşırken dikkatli olun.</li>
+          <li>Hesap paylaşımından kaynaklanan sorunlarda yönetim her kaybı karşılamak zorunda değildir.</li>
+        </ol>
+      </details>
+
+      <details>
+        <summary><span class="k">9</span>Cezalar</summary>
+        <p class="rule-intro">Kural ihlallerine göre şu cezalar uygulanabilir:</p>
+        <ul>
+          <li>Uyarı</li>
+          <li>Mute</li>
+          <li>Geçici ban</li>
+          <li>Kalıcı ban</li>
+        </ul>
+        <p class="rule-outro">Cezanın türü, ihlalin ağırlığına, tekrarına ve mevcut kanıtlara göre belirlenir. Ağır ihlallerde doğrudan kalıcı ban uygulanabilir.</p>
+      </details>
+
+      <details>
+        <summary><span class="k">10</span>Son Hükümler</summary>
+        <ol>
+          <li>Kurallar bütün oyuncular için geçerlidir.</li>
+          <li>Yönetim, gerekli durumlarda kuralları güncelleyebilir.</li>
+          <li>Kurallarda belirtilmeyen olaylar, adil oyun ve topluluk güvenliği ilkelerine göre değerlendirilir.</li>
+          <li>Sunucuya katılan oyuncuların kuralları okuması ve takip etmesi beklenir.</li>
+        </ol>
+      </details>
+    </div>
+  </section>
+
+  <section id="ekip">
+    <div class="wrap">
+      <div class="head">
+        <h2>Yetkililer</h2>
+        <p>Sunucuyu yöneten ekip.</p>
+      </div>
+      <div class="team">
+        <div class="member"><div class="avatar"><img src="zyven.jpg" alt="Zyven"></div><div><b>Zyven</b><span>Kurucu &amp; Sahip</span></div></div>
+        <div class="member"><div class="avatar"><img src="legalwarrior.jpg" alt="LegalWarrior"></div><div><b>LegalWarrior</b><span>Admin</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="iletisim">
+    <div class="wrap">
+      <div class="head">
+        <h2>İletişim</h2>
+        <p>Soru, öneri veya satın alım için bize ulaş.</p>
+      </div>
+      <div class="contact">
+        <a class="c" href="https://discord.gg/8kB8bu6dHQ" target="_blank" rel="noopener">
+          <small>Discord</small><b>discord.gg/8kB8bu6dHQ</b><em>En hızlı yol</em>
+        </a>
+        <a class="c" href="https://www.instagram.com/zyven_officall" target="_blank" rel="noopener">
+          <small>Instagram</small><b>@zyven_officall</b><em>Duyurular ve paylaşımlar</em>
+        </a>
+        <div class="c">
+          <small>E-posta</small><b id="mail-text">networkendoria@gmail.com</b>
+          <div class="copy-line"><button class="btn ghost small" id="mail-copy" type="button">Adresi kopyala</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="modal" id="login-modal" hidden>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="login-title">
+    <button class="modal-x" id="login-close" type="button" aria-label="Kapat">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2" stroke-linecap="square" fill="none"/></svg>
+    </button>
+    <p class="eyebrow">Giriş Yap</p>
+    <h3 id="login-title">Yakında!</h3>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Endoria Network. Tüm hakları saklıdır.</span>
+    <span>Allah'ın izniyle.</span>
+    <p class="legal">Bu sitedeki logo, tasarım ve metinler Endoria Network'e aittir; izinsiz kopyalanamaz, çoğaltılamaz veya kullanılamaz. Endoria Network, Mojang Studios veya Microsoft ile bağlantılı değildir. Minecraft, Mojang Studios'un ticari markasıdır.</p>
+  </div>
+</footer>
+
+<script>
+  // Sunucu IP adresini buraya yaz. Boş bırakılırsa sayfada "IP adresi yakında" görünür.
+  var SERVER_IP = "";
+
+  // Spawner yumurtaları: iki renkten üretilen küçük piksel yumurta
+  var EGG = [
+    "....bbbb....", "...bbbbbb...", "..bbbsbbbb..", "..bbssbbbb..",
+    ".bbbbbbbsbb.", ".bbsbbbbssb.", ".bbbbbbbbbb.", ".bbbbsbbbbb.",
+    ".bsbbssbbbb.", ".bbbbbbbbsb.", ".bbbbbbbbbb.", "..bbbbbbbb..",
+    "...bbbbbb...", "....bbbb...."
+  ];
+  document.querySelectorAll(".egg").forEach(function (el) {
+    var c = { b: el.dataset.b, s: el.dataset.s }, rects = "";
+    EGG.forEach(function (row, y) {
+      for (var x = 0; x < row.length; x++) {
+        var ch = row[x];
+        if (ch !== ".") rects += '<rect x="' + x + '" y="' + y + '" width="1" height="1" fill="' + c[ch] + '"/>';
+      }
+    });
+    el.innerHTML = '<svg viewBox="0 0 12 14" aria-hidden="true">' + rects + "</svg>";
+  });
+
+  // Giriş penceresi
+  var modal = document.getElementById("login-modal");
+  var openBtn = document.getElementById("login-open");
+  var closeBtn = document.getElementById("login-close");
+  function openModal() { modal.hidden = false; closeBtn.focus(); }
+  function closeModal() { modal.hidden = true; openBtn.focus(); }
+  openBtn.addEventListener("click", openModal);
+  closeBtn.addEventListener("click", closeModal);
+  modal.addEventListener("click", function (e) { if (e.target === modal) closeModal(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !modal.hidden) closeModal(); });
+
+  var ipText = document.getElementById("ip-text");
+  var ipBtn = document.getElementById("ip-copy");
+  if (SERVER_IP) { ipText.textContent = SERVER_IP; } else { ipBtn.hidden = true; }
+
+  function copyText(text, btn, done) {
+    var original = btn.textContent;
+    function ok() { btn.textContent = done; setTimeout(function () { btn.textContent = original; }, 1800); }
+    function fallback() {
+      var r = document.createRange();
+      var el = document.getElementById(btn.dataset.src);
+      if (el) { r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(ok, fallback);
+    } else { fallback(); }
+  }
+  ipBtn.dataset.src = "ip-text";
+  ipBtn.addEventListener("click", function () { copyText(SERVER_IP, ipBtn, "Kopyalandı"); });
+  var mailBtn = document.getElementById("mail-copy");
+  mailBtn.dataset.src = "mail-text";
+  mailBtn.addEventListener("click", function () { copyText("networkendoria@gmail.com", mailBtn, "Kopyalandı"); });
+</script>
