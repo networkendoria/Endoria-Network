@@ -188,6 +188,13 @@ a.c:hover { border-color: var(--purple); }
 .modal-box { position: relative; width: min(100%, 400px); padding: 56px 32px 48px; border: 1px solid var(--purple); background: var(--bg-raised); box-shadow: 0 0 80px rgba(139,92,246,.28); text-align: center; }
 .modal-box .eyebrow { margin-bottom: 14px; }
 .modal-box h3 { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: clamp(26px, 6vw, 34px); letter-spacing: .08em; text-transform: uppercase; }
+.modal-text { margin: 14px 0 28px; color: var(--fg-dim); }
+.modal-btn { width: 100%; }
+.modal-user { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 4px; min-width: 0; }
+.modal-user img { width: 56px; height: 56px; object-fit: cover; border: 1px solid var(--purple); }
+.modal-user b { font-size: 20px; overflow-wrap: anywhere; }
+#login-open img { width: 22px; height: 22px; object-fit: cover; }
+#login-open .nm { max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .modal-x { position: absolute; top: 12px; right: 12px; width: 40px; height: 40px; display: grid; place-items: center; background: transparent; border: 1px solid var(--line); color: var(--fg-dim); cursor: pointer; transition: color .2s, border-color .2s; }
 .modal-x:hover { color: var(--fg); border-color: var(--purple-soft); }
 
@@ -492,7 +499,19 @@ footer .legal { grid-column: 1 / -1; margin: 8px 0 0; padding-top: 20px; border-
       <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2" stroke-linecap="square" fill="none"/></svg>
     </button>
     <p class="eyebrow">Giriş Yap</p>
-    <h3 id="login-title">Yakında!</h3>
+    <div id="login-soon">
+      <h3 id="login-title">Yakında!</h3>
+    </div>
+    <div id="login-signin" hidden>
+      <h3>Hoş geldin</h3>
+      <p class="modal-text">Discord hesabınla tek tıkla giriş yap. Şifre istemiyoruz.</p>
+      <button class="btn modal-btn" id="discord-login" type="button">Discord ile Giriş Yap</button>
+    </div>
+    <div id="login-account" hidden>
+      <div class="modal-user"><img id="acc-avatar" alt="" hidden><b id="acc-name"></b></div>
+      <p class="modal-text">Discord hesabınla giriş yaptın.</p>
+      <button class="btn ghost modal-btn" id="logout-btn" type="button">Çıkış Yap</button>
+    </div>
   </div>
 </div>
 
@@ -551,9 +570,55 @@ footer .legal { grid-column: 1 / -1; margin: 8px 0 0; padding-top: 20px; border-
     document.querySelectorAll("main section[id]").forEach(function (s) { io.observe(s); });
   }
 
+  // Discord ile giriş (Supabase). İki değer de boşsa buton "Yakında!" gösterir.
+  var SUPABASE_URL = "";
+  var SUPABASE_ANON_KEY = "";
+
+  var openBtn = document.getElementById("login-open");
+  var loginIcon = openBtn.innerHTML;
+  var sb = null;
+  var views = {
+    soon: document.getElementById("login-soon"),
+    signin: document.getElementById("login-signin"),
+    account: document.getElementById("login-account")
+  };
+  function showView(name) { Object.keys(views).forEach(function (k) { views[k].hidden = k !== name; }); }
+
+  function renderUser(user) {
+    if (!user) { openBtn.innerHTML = loginIcon; showView("signin"); return; }
+    var m = user.user_metadata || {};
+    var name = m.custom_claims && m.custom_claims.global_name || m.full_name || m.name || m.user_name || "Oyuncu";
+    var avatar = typeof m.avatar_url === "string" && m.avatar_url.indexOf("https://") === 0 ? m.avatar_url : "";
+    openBtn.textContent = "";
+    if (avatar) { var i = document.createElement("img"); i.src = avatar; i.alt = ""; openBtn.appendChild(i); }
+    var s = document.createElement("span"); s.className = "nm"; s.textContent = name; openBtn.appendChild(s);
+    document.getElementById("acc-name").textContent = name;
+    var big = document.getElementById("acc-avatar");
+    if (avatar) { big.src = avatar; big.hidden = false; } else { big.hidden = true; }
+    showView("account");
+  }
+
+  if (SUPABASE_URL && SUPABASE_ANON_KEY) {
+    showView("signin");
+    var sc = document.createElement("script");
+    sc.src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js";
+    sc.onload = function () {
+      sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      sb.auth.getSession().then(function (r) { renderUser(r.data && r.data.session && r.data.session.user); });
+      sb.auth.onAuthStateChange(function (_e, session) { renderUser(session && session.user); });
+    };
+    document.head.appendChild(sc);
+    document.getElementById("discord-login").addEventListener("click", function () {
+      if (!sb) return;
+      sb.auth.signInWithOAuth({ provider: "discord", options: { redirectTo: location.origin + location.pathname } });
+    });
+    document.getElementById("logout-btn").addEventListener("click", function () {
+      if (sb) sb.auth.signOut().then(function () { closeModal(); });
+    });
+  }
+
   // Giriş penceresi
   var modal = document.getElementById("login-modal");
-  var openBtn = document.getElementById("login-open");
   var closeBtn = document.getElementById("login-close");
   function openModal() { modal.hidden = false; closeBtn.focus(); }
   function closeModal() { modal.hidden = true; openBtn.focus(); }
