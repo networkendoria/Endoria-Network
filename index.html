@@ -571,8 +571,8 @@ footer .legal { grid-column: 1 / -1; margin: 8px 0 0; padding-top: 20px; border-
   }
 
   // Discord ile giriş (Supabase). İki değer de boşsa buton "Yakında!" gösterir.
-  var SUPABASE_URL = "";
-  var SUPABASE_ANON_KEY = "";
+  var SUPABASE_URL = "https://zyrvhqzgobrbcfurxfst.supabase.co";
+  var SUPABASE_ANON_KEY = "sb_publishable_RPSlDVFDbavDxWNDW5xCFg_xDMzy9MK";
 
   var openBtn = document.getElementById("login-open");
   var loginIcon = openBtn.innerHTML;
@@ -601,7 +601,7 @@ footer .legal { grid-column: 1 / -1; margin: 8px 0 0; padding-top: 20px; border-
   if (SUPABASE_URL && SUPABASE_ANON_KEY) {
     showView("signin");
     var sc = document.createElement("script");
-    sc.src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js";
+    sc.src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.1/dist/umd/supabase.js";
     sc.onload = function () {
       sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       sb.auth.getSession().then(function (r) { renderUser(r.data && r.data.session && r.data.session.user); });
