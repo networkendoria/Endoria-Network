@@ -1,3 +1,8 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Endoria Network</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Syncopate:wght@400;700&display=swap">
@@ -34,7 +39,7 @@ a { color: inherit; text-decoration: none; }
 :focus-visible { outline: 2px solid var(--purple-soft); outline-offset: 3px; }
 
 .wrap {
-  max-width: 1120px;
+  max-width: 1200px;
   margin-inline: auto;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
@@ -54,6 +59,20 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .nav ul { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
 .nav ul a { font-size: 13px; letter-spacing: .08em; color: var(--fg-dim); transition: color .2s; }
 .nav ul a:hover { color: var(--fg); }
+.nav ul a.active { color: var(--fg); box-shadow: 0 6px 0 -4px var(--purple); }
+
+/* Telefon menüsü */
+.menu-btn { display: none; width: 44px; height: 44px; place-items: center; background: transparent; border: 1px solid var(--line); color: var(--fg); cursor: pointer; transition: border-color .2s; }
+.menu-btn:hover { border-color: var(--purple-soft); }
+.mobile-menu {
+  position: absolute; top: 100%; left: 0; right: 0; display: grid;
+  background: var(--bg); border-bottom: 1px solid var(--line);
+  padding: 4px max(16px, env(safe-area-inset-right, 0px)) 22px max(16px, env(safe-area-inset-left, 0px));
+}
+.mobile-menu .m-link { padding: 17px 0; border-bottom: 1px solid var(--line); font-weight: 600; font-size: 15px; letter-spacing: .06em; }
+.mobile-menu .m-link.active { color: var(--purple-soft); }
+.mobile-menu .btn { margin-top: 20px; }
+@media (min-width: 861px) { .mobile-menu { display: none !important; } }
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
   padding: 12px 22px; font: 600 14px/1 var(--font-body); letter-spacing: .04em;
@@ -89,7 +108,7 @@ h1 span { color: var(--purple); }
 .hero-art img { position: relative; width: min(100%, 420px); aspect-ratio: 1; object-fit: cover; object-position: center 48%; mix-blend-mode: screen; }
 
 /* Bölümler */
-section { padding-block: 88px; border-bottom: 1px solid var(--line); }
+section { padding-block: 88px; border-bottom: 1px solid var(--line); scroll-margin-top: 64px; }
 section > .wrap > * { min-width: 0; }
 .head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px 40px; margin-bottom: 44px; }
 h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(22px, 3.4vw, 36px); letter-spacing: .06em; text-transform: uppercase; margin: 0; text-wrap: balance; }
@@ -145,7 +164,7 @@ details ul li::before { content: ""; position: absolute; left: 0; top: .7em; wid
 .rule-outro { padding: 0 4px 26px; margin: 0; color: var(--fg-dim); }
 
 /* Ekip */
-.team { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: 760px; }
+.team { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .member { display: flex; align-items: center; gap: 20px; padding: 26px; border: 1px solid var(--line); background: var(--bg-raised); }
 .avatar { flex: none; width: 76px; height: 76px; border: 1px solid var(--purple); background: var(--bg); overflow: hidden; }
 .avatar img { display: block; width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; }
@@ -173,13 +192,15 @@ a.c:hover { border-color: var(--purple); }
 .modal-x:hover { color: var(--fg); border-color: var(--purple-soft); }
 
 footer { padding-block: 40px; color: var(--fg-dim); font-size: 14px; }
-footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; }
-footer .legal { flex: 1 1 100%; margin: 8px 0 0; padding-top: 20px; border-top: 1px solid var(--line); font-size: 12.5px; line-height: 1.7; max-width: 80ch; }
+footer .wrap { display: grid; grid-template-columns: 1fr auto; gap: 12px 24px; }
+footer .legal { grid-column: 1 / -1; margin: 8px 0 0; padding-top: 20px; border-top: 1px solid var(--line); font-size: 12.5px; line-height: 1.7; max-width: 80ch; }
 
 @media (max-width: 860px) {
   .nav ul { display: none; }
-  .hero .wrap { grid-template-columns: 1fr; gap: 24px; padding-block: 48px 56px; }
-  .hero-art { order: -1; justify-self: start; width: min(62%, 260px); }
+  .menu-btn { display: grid; }
+  .nav .wrap > .nav-discord { margin-left: auto; }
+  .hero .wrap { grid-template-columns: 1fr; gap: 20px; padding-block: 32px 56px; }
+  .hero-art { order: -1; justify-self: start; width: min(44%, 170px); }
   .store { grid-template-columns: 1fr; gap: 40px; }
   .contact { grid-template-columns: 1fr; }
   section { padding-block: 64px; }
@@ -189,11 +210,18 @@ footer .legal { flex: 1 1 100%; margin: 8px 0 0; padding-top: 20px; border-top: 
   .fact, .fact + .fact { padding: 22px 0; border-left: 0; }
   .team { grid-template-columns: 1fr; }
   .nav .nav-discord { display: none; }
+  .nav .menu-btn { margin-left: auto; }
+  .ip-row .btn { width: 100%; }
+  footer .wrap { grid-template-columns: 1fr; }
+  .modal-box { padding: 60px 20px 44px; }
   .ip { width: 100%; justify-content: space-between; }
   .rank { padding: 20px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
 </style>
+</head>
+<body>
+
 
 <header class="nav">
   <div class="wrap">
@@ -212,7 +240,18 @@ footer .legal { flex: 1 1 100%; margin: 8px 0 0; padding-top: 20px; border-top: 
       <li><a href="#iletisim">İletişim</a></li>
     </ul>
     <a class="btn small nav-discord" href="https://discord.gg/8kB8bu6dHQ" target="_blank" rel="noopener">Discord'a Katıl</a>
+    <button class="menu-btn" id="menu-btn" type="button" aria-label="Menüyü aç" aria-expanded="false" aria-controls="mobile-menu">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="square" fill="none"/></svg>
+    </button>
   </div>
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Menü" hidden>
+    <a class="m-link" href="#sunucu">Sunucu</a>
+    <a class="m-link" href="#magaza">Mağaza</a>
+    <a class="m-link" href="#kurallar">Kurallar</a>
+    <a class="m-link" href="#ekip">Ekip</a>
+    <a class="m-link" href="#iletisim">İletişim</a>
+    <a class="btn" href="https://discord.gg/8kB8bu6dHQ" target="_blank" rel="noopener">Discord'a Katıl</a>
+  </nav>
 </header>
 
 <main id="top">
@@ -227,7 +266,7 @@ footer .legal { flex: 1 1 100%; margin: 8px 0 0; padding-top: 20px; border-top: 
             <div><small>Sunucu IP</small><br><code id="ip-text">IP adresi yakında</code></div>
             <button class="btn small" id="ip-copy" type="button">Kopyala</button>
           </div>
-          <a class="btn ghost" href="https://discord.gg/8kB8bu6dHQ" target="_blank" rel="noopener">Discord</a>
+          <a class="btn" href="https://discord.gg/8kB8bu6dHQ" target="_blank" rel="noopener">Discord'a Katıl</a>
         </div>
       </div>
       <div class="hero-art">
@@ -487,6 +526,31 @@ footer .legal { flex: 1 1 100%; margin: 8px 0 0; padding-top: 20px; border-top: 
     el.innerHTML = '<svg viewBox="0 0 12 14" aria-hidden="true">' + rects + "</svg>";
   });
 
+  // Telefon menüsü
+  var menuBtn = document.getElementById("menu-btn");
+  var menu = document.getElementById("mobile-menu");
+  function setMenu(open) {
+    menu.hidden = !open;
+    menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    menuBtn.setAttribute("aria-label", open ? "Menüyü kapat" : "Menüyü aç");
+  }
+  menuBtn.addEventListener("click", function () { setMenu(menu.hidden); });
+  menu.addEventListener("click", function (e) { if (e.target.closest("a")) setMenu(false); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !menu.hidden) setMenu(false); });
+  window.addEventListener("resize", function () { if (window.innerWidth > 860) setMenu(false); });
+
+  // Gezinirken aktif bölümü vurgula
+  var links = document.querySelectorAll(".nav ul a, .mobile-menu .m-link");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        links.forEach(function (a) { a.classList.toggle("active", a.getAttribute("href") === "#" + en.target.id); });
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    document.querySelectorAll("main section[id]").forEach(function (s) { io.observe(s); });
+  }
+
   // Giriş penceresi
   var modal = document.getElementById("login-modal");
   var openBtn = document.getElementById("login-open");
@@ -520,3 +584,6 @@ footer .legal { flex: 1 1 100%; margin: 8px 0 0; padding-top: 20px; border-top: 
   mailBtn.dataset.src = "mail-text";
   mailBtn.addEventListener("click", function () { copyText("networkendoria@gmail.com", mailBtn, "Kopyalandı"); });
 </script>
+
+</body>
+</html>
