@@ -521,6 +521,7 @@ footer .legal { grid-column: 1 / -1; margin: 8px 0 0; padding-top: 20px; border-
       <h3>Hoş geldin</h3>
       <p class="modal-text">Discord hesabınla tek tıkla giriş yap. Şifre istemiyoruz.</p>
       <button class="btn modal-btn" id="discord-login" type="button">Discord ile Giriş Yap</button>
+      <p class="modal-note" id="login-note" hidden></p>
     </div>
     <div id="login-account" hidden>
       <div class="modal-user"><img id="acc-avatar" alt="" hidden><b id="acc-name"></b></div>
@@ -761,6 +762,22 @@ footer .legal { grid-column: 1 / -1; margin: 8px 0 0; padding-top: 20px; border-
   var mailBtn = document.getElementById("mail-copy");
   mailBtn.dataset.src = "mail-text";
   mailBtn.addEventListener("click", function () { copyText("networkendoria@gmail.com", mailBtn, "Kopyalandı"); });
+
+  // Giriş hatası geri dönüşle gelirse pencerede göster
+  (function () {
+    if (!(SUPABASE_URL && SUPABASE_ANON_KEY)) return;
+    var q = new URLSearchParams((location.hash || "").replace(/^#/, "") + "&" + (location.search || "").replace(/^\?/, ""));
+    var desc = q.get("error_description");
+    if (!desc && !q.get("error")) return;
+    var note = document.getElementById("login-note");
+    note.textContent = /email/i.test(desc || "")
+      ? "Discord hesabında doğrulanmış bir e-posta yok. Discord'da e-postanı doğrulayıp tekrar dene."
+      : "Giriş tamamlanamadı" + (desc ? ": " + desc : ".");
+    note.hidden = false;
+    showView("signin");
+    openModal();
+    try { history.replaceState(null, "", location.pathname); } catch (e) {}
+  })();
 </script>
 
 </body>
