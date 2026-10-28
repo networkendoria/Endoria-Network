@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Endoria Network</title>
 <meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Endoria Network resmî web sitesi. Survival SMP, 1.8+ – 26.2 sürüm desteği, kurallar, mağaza ve iletişim.">
+<meta name="theme-color" content="#07070a">
+<meta property="og:title" content="Endoria Network">
+<meta property="og:description" content="Resmî Survival SMP sunucusu. Kurallar, mağaza ve topluluk.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://networkendoria.github.io/Endoria-Network/logo.jpg">
+<link rel="icon" href="logo.jpg">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Syncopate:wght@400;700&display=swap">
 <style>
 /* Layout: tek sayfa, siyah zemin, ortada hizalı değil sola yaslı büyük başlık; logo sağda mor hale içinde.
@@ -18,6 +25,8 @@
   --purple: #8b5cf6;
   --purple-soft: #b79dff;
   --purple-deep: #3b1f7a;
+  --btn: #7c3aed;
+  --btn-hover: #8548f0;
   --font-display: "Syncopate", "Arial Narrow", sans-serif;
   --font-body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
   color-scheme: dark;
@@ -44,6 +53,9 @@ a { color: inherit; text-decoration: none; }
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
+
+.skip { position: absolute; left: 16px; top: -64px; z-index: 100; padding: 12px 18px; background: var(--btn); color: #fff; font-weight: 600; }
+.skip:focus { top: calc(env(safe-area-inset-top, 0px) + 8px); }
 
 /* Üst menü */
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--bg); }
@@ -76,22 +88,40 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
   padding: 12px 22px; font: 600 14px/1 var(--font-body); letter-spacing: .04em;
-  border: 1px solid var(--purple); background: var(--purple); color: #fff; cursor: pointer;
-  transition: background .2s, border-color .2s, transform .2s;
+  border: 1px solid var(--btn); background: var(--btn); color: #fff; cursor: pointer;
+  transition: background .2s, border-color .2s, box-shadow .25s;
 }
-.btn:hover { background: #9d75f8; border-color: #9d75f8; }
+.btn:hover { background: var(--btn-hover); border-color: var(--btn-hover); box-shadow: 0 0 26px -6px rgba(139,92,246,.75); }
 .btn.ghost { background: transparent; color: var(--fg); border-color: var(--line); }
-.btn.ghost:hover { border-color: var(--purple-soft); background: transparent; }
+.btn.ghost:hover { border-color: var(--purple-soft); background: transparent; box-shadow: none; }
+.btn:disabled { opacity: .6; cursor: progress; }
 .btn.small { padding: 10px 16px; font-size: 13px; }
 
 /* Hero */
 .hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); }
+/* Kristal yüzeyleri: çok hafif çapraz kesikler ve sağda mor ışık */
+.hero::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: -1;
+  background:
+    radial-gradient(60% 90% at 82% 42%, rgba(139,92,246,.16), transparent 70%),
+    repeating-linear-gradient(115deg, transparent 0 56px, rgba(183,157,255,.035) 56px 57px);
+}
+.shards { position: absolute; right: -4%; top: -6%; width: min(62vw, 680px); height: auto; opacity: .55; pointer-events: none; z-index: -1; animation: float 18s ease-in-out infinite alternate; }
+.shards * { fill: rgba(139,92,246,.05); stroke: rgba(183,157,255,.32); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+@keyframes float { from { transform: translateY(0) rotate(0deg); } to { transform: translateY(-14px) rotate(1.2deg); } }
+@keyframes pulse { 0%, 100% { opacity: .72; transform: scale(.96); } 50% { opacity: 1; transform: scale(1.04); } }
 .hero .wrap { display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; padding-block: 72px 80px; }
 .hero > .wrap > * { min-width: 0; }
 .eyebrow { font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: var(--purple-soft); font-weight: 600; margin: 0 0 20px; }
 h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(34px, 6.4vw, 76px); line-height: 1.02; letter-spacing: .02em; text-transform: uppercase; margin: 0 0 24px; text-wrap: balance; }
 h1 span { color: var(--purple); }
-.lead { max-width: 46ch; color: var(--fg-dim); font-size: 18px; margin: 0 0 32px; }
+.lead { max-width: 46ch; color: var(--fg-dim); font-size: 18px; margin: 0 0 22px; }
+.status { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 22px; padding: 8px 14px; border: 1px solid var(--line); background: rgba(14,14,19,.7); font-size: 13px; font-weight: 600; letter-spacing: .04em; color: var(--fg-dim); }
+.status .dot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--purple); box-shadow: 0 0 10px rgba(139,92,246,.8); }
+.status.on { color: var(--fg); border-color: #1f5a3a; }
+.status.on .dot { background: #3ddc84; box-shadow: 0 0 10px rgba(61,220,132,.7); }
+.status.off { color: var(--fg); border-color: #6a2a2a; }
+.status.off .dot { background: #e5645d; box-shadow: 0 0 10px rgba(229,100,93,.6); }
 .ip-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: stretch; }
 .ip {
   display: flex; align-items: center; gap: 14px; padding: 6px 6px 6px 18px;
@@ -103,9 +133,9 @@ h1 span { color: var(--purple); }
 .hero-art::before {
   content: ""; position: absolute; width: 86%; aspect-ratio: 1; border-radius: 50%;
   background: radial-gradient(circle, rgba(139,92,246,.42), rgba(139,92,246,0) 68%);
-  filter: blur(18px);
+  filter: blur(18px); animation: pulse 7s ease-in-out infinite;
 }
-.hero-art img { position: relative; width: min(100%, 420px); aspect-ratio: 1; object-fit: cover; object-position: center 48%; mix-blend-mode: screen; }
+.hero-art img { position: relative; width: min(100%, 420px); height: auto; aspect-ratio: 1; object-fit: cover; object-position: center 48%; mix-blend-mode: screen; }
 
 /* Bölümler */
 section { padding-block: 88px; border-bottom: 1px solid var(--line); scroll-margin-top: 64px; }
@@ -113,6 +143,7 @@ section > .wrap > * { min-width: 0; }
 .head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px 40px; margin-bottom: 44px; }
 h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(22px, 3.4vw, 36px); letter-spacing: .06em; text-transform: uppercase; margin: 0; text-wrap: balance; }
 .head p { margin: 0; max-width: 44ch; color: var(--fg-dim); }
+h2::before { content: ""; display: inline-block; width: 9px; height: 9px; margin-right: 14px; vertical-align: .12em; background: var(--purple); transform: rotate(45deg); box-shadow: 0 0 12px rgba(139,92,246,.7); }
 
 /* Sunucu */
 .facts { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
@@ -131,7 +162,7 @@ h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(22px, 
 .rank .n { font-family: var(--font-display); font-weight: 700; font-size: clamp(18px, 2.6vw, 26px); letter-spacing: .06em; text-transform: uppercase; }
 .price { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 22px; white-space: nowrap; }
 .price small { font-size: 13px; color: var(--fg-dim); font-weight: 600; margin-left: 4px; }
-.rank.top { border-color: var(--purple); background: linear-gradient(135deg, rgba(139,92,246,.18), var(--bg-raised) 60%); }
+.rank.top { border-color: var(--purple); background: linear-gradient(135deg, rgba(139,92,246,.18), var(--bg-raised) 60%); box-shadow: 0 0 44px -20px rgba(139,92,246,.7); }
 .rank.top .price { color: var(--purple-soft); }
 .spawn { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
 .spawn li { display: flex; justify-content: space-between; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); }
@@ -145,6 +176,7 @@ h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(22px, 
 /* Kurallar */
 .rules-meta { display: flex; flex-wrap: wrap; gap: 8px 28px; color: var(--fg-dim); font-size: 14px; margin-bottom: 28px; }
 .rules-meta b { color: var(--fg); font-weight: 600; }
+.rules-tools { display: flex; justify-content: flex-end; margin-bottom: 14px; }
 details { border-top: 1px solid var(--line); }
 details:last-of-type { border-bottom: 1px solid var(--line); }
 summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 18px; padding: 22px 4px; font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; }
@@ -174,7 +206,8 @@ details ul li::before { content: ""; position: absolute; left: 0; top: .7em; wid
 /* İletişim */
 .contact { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .c { display: flex; flex-direction: column; gap: 6px; padding: 26px; border: 1px solid var(--line); background: var(--bg-raised); transition: border-color .2s; min-width: 0; }
-a.c:hover { border-color: var(--purple); }
+a.c { transition: border-color .2s, box-shadow .25s; }
+a.c:hover { border-color: var(--purple); box-shadow: 0 14px 40px -18px rgba(139,92,246,.55); }
 .c small { font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--purple-soft); font-weight: 600; }
 .c b { font-size: 17px; overflow-wrap: anywhere; font-weight: 600; }
 .c em { font-style: normal; color: var(--fg-dim); font-size: 14px; }
@@ -239,18 +272,19 @@ footer .legal { grid-column: 1 / -1; margin: 8px 0 0; padding-top: 20px; border-
   .ip { width: 100%; justify-content: space-between; }
   .rank { padding: 20px; }
 }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
 </style>
 </head>
 <body>
 
 
+<a class="skip" href="#top">İçeriğe geç</a>
 <header class="nav">
   <div class="wrap">
     <div class="left">
       <button class="btn ghost small" id="login-open" type="button"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" fill="none" stroke="currentColor" stroke-width="2"/></svg>Giriş Yap</button>
       <a class="brand" href="#top" aria-label="Endoria Network ana sayfa">
-        <img src="logo.jpg" alt="">
+        <img src="logo.jpg" alt="" width="34" height="34">
         <span>Endoria</span>
       </a>
     </div>
@@ -278,11 +312,19 @@ footer .legal { grid-column: 1 / -1; margin: 8px 0 0; padding-top: 20px; border-
 
 <main id="top">
   <div class="hero">
+    <svg class="shards" viewBox="0 0 600 600" aria-hidden="true" focusable="false">
+      <polygon points="300,40 380,200 300,520 220,200"/>
+      <polyline points="220,200 380,200"/>
+      <polyline points="300,40 300,520"/>
+      <polygon points="470,170 520,280 470,430 420,280"/>
+      <polygon points="120,310 160,390 120,510 80,390"/>
+    </svg>
     <div class="wrap">
       <div>
         <p class="eyebrow">Resmî Survival SMP</p>
         <h1>Endoria <span>Network</span></h1>
         <p class="lead">Adil kurallar, güçlü bir topluluk ve 1.8'den 26.2'ye kadar her sürümden katılım. Kendi hikâyeni Endoria'da yaz.</p>
+        <p class="status" id="server-status" role="status" aria-live="polite"><span class="dot" aria-hidden="true"></span><span id="status-text">Açılışa hazırlanıyor</span></p>
         <div class="ip-row">
           <div class="ip">
             <div><small>Sunucu IP</small><br><code id="ip-text">IP adresi yakında</code></div>
@@ -292,7 +334,7 @@ footer .legal { grid-column: 1 / -1; margin: 8px 0 0; padding-top: 20px; border-
         </div>
       </div>
       <div class="hero-art">
-        <img src="logo.jpg" alt="Endoria Network logosu: daire içinde bir kristal">
+        <img src="logo.jpg" alt="Endoria Network logosu: daire içinde bir kristal" width="420" height="420" fetchpriority="high">
       </div>
     </div>
   </div>
@@ -355,6 +397,7 @@ footer .legal { grid-column: 1 / -1; margin: 8px 0 0; padding-top: 20px; border-
         <span>Tür: <b>Survival SMP</b></span>
         <span>Sürüm: <b>1.8+ – 26.2</b></span>
       </div>
+      <div class="rules-tools"><button class="btn ghost small" id="rules-toggle" type="button">Tümünü aç</button></div>
 
       <details open>
         <summary><span class="k">1</span>Genel Kurallar</summary>
@@ -480,8 +523,8 @@ footer .legal { grid-column: 1 / -1; margin: 8px 0 0; padding-top: 20px; border-
         <p>Sunucuyu yöneten ekip.</p>
       </div>
       <div class="team">
-        <div class="member"><div class="avatar"><img src="zyven.jpg" alt="Zyven"></div><div><b>Zyven</b><span>Kurucu &amp; Sahip</span></div></div>
-        <div class="member"><div class="avatar"><img src="legalwarrior.jpg" alt="LegalWarrior"></div><div><b>LegalWarrior</b><span>Admin</span></div></div>
+        <div class="member"><div class="avatar"><img src="zyven.jpg" alt="Zyven" width="76" height="76" loading="lazy" decoding="async"></div><div><b>Zyven</b><span>Kurucu &amp; Sahip</span></div></div>
+        <div class="member"><div class="avatar"><img src="legalwarrior.jpg" alt="LegalWarrior" width="76" height="76" loading="lazy" decoding="async"></div><div><b>LegalWarrior</b><span>Admin</span></div></div>
       </div>
     </div>
   </section>
@@ -745,23 +788,74 @@ footer .legal { grid-column: 1 / -1; margin: 8px 0 0; padding-top: 20px; border-
   var ipBtn = document.getElementById("ip-copy");
   if (SERVER_IP) { ipText.textContent = SERVER_IP; } else { ipBtn.hidden = true; }
 
+  // Kopyalama: önce panoya yazar, olmazsa eski yöntemi dener, ikisi de olmazsa bunu butonda söyler.
   function copyText(text, btn, done) {
-    var original = btn.textContent;
-    function ok() { btn.textContent = done; setTimeout(function () { btn.textContent = original; }, 1800); }
-    function fallback() {
-      var r = document.createRange();
-      var el = document.getElementById(btn.dataset.src);
-      if (el) { r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+    if (!btn.dataset.label) btn.dataset.label = btn.textContent;
+    function flash(msg) {
+      btn.textContent = msg;
+      clearTimeout(btn._t);
+      btn._t = setTimeout(function () { btn.textContent = btn.dataset.label; }, 2000);
+    }
+    function legacy() {
+      var ta = document.createElement("textarea");
+      ta.value = text; ta.setAttribute("readonly", "");
+      ta.style.cssText = "position:fixed;top:0;left:0;opacity:0";
+      document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, text.length);
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(ta);
+      flash(ok ? done : "Kopyalanamadı");
     }
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(ok, fallback);
-    } else { fallback(); }
+      navigator.clipboard.writeText(text).then(function () { flash(done); }, legacy);
+    } else { legacy(); }
   }
-  ipBtn.dataset.src = "ip-text";
   ipBtn.addEventListener("click", function () { copyText(SERVER_IP, ipBtn, "Kopyalandı"); });
   var mailBtn = document.getElementById("mail-copy");
-  mailBtn.dataset.src = "mail-text";
   mailBtn.addEventListener("click", function () { copyText("networkendoria@gmail.com", mailBtn, "Kopyalandı"); });
+
+  // Sunucu durumu: yalnızca IP girilmişse ve gerçek bir durum kaynağı yanıt verirse "çevrimiçi" yazar.
+  var statusEl = document.getElementById("server-status");
+  var statusText = document.getElementById("status-text");
+  function setStatus(kind, text) { statusEl.className = "status" + (kind ? " " + kind : ""); statusText.textContent = text; }
+  function checkStatus() {
+    var ctl = ("AbortController" in window) ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 8000);
+    fetch("https://api.mcsrvstat.us/3/" + encodeURIComponent(SERVER_IP), ctl ? { signal: ctl.signal } : undefined)
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        clearTimeout(timer);
+        if (d && d.online === true) {
+          var p = d.players || {}, extra = "";
+          if (typeof p.online === "number") extra = " · " + p.online + (typeof p.max === "number" ? "/" + p.max : "") + " oyuncu";
+          setStatus("on", "Çevrimiçi" + extra);
+        } else if (d && d.online === false) { setStatus("off", "Çevrimdışı"); }
+        else { setStatus("", "Durum alınamadı"); }
+      })
+      .catch(function () { clearTimeout(timer); setStatus("", "Durum alınamadı"); });
+  }
+  if (SERVER_IP) {
+    setStatus("", "Durum kontrol ediliyor");
+    checkStatus();
+    setInterval(function () { if (!document.hidden) checkStatus(); }, 60000);
+  } else {
+    setStatus("", "Açılışa hazırlanıyor");
+  }
+
+  // Kurallar: tümünü aç / kapat
+  var rulesBtn = document.getElementById("rules-toggle");
+  var ruleItems = document.querySelectorAll("#kurallar details");
+  function syncRulesBtn() {
+    var all = Array.prototype.every.call(ruleItems, function (d) { return d.open; });
+    rulesBtn.textContent = all ? "Tümünü kapat" : "Tümünü aç";
+  }
+  rulesBtn.addEventListener("click", function () {
+    var open = rulesBtn.textContent === "Tümünü aç";
+    ruleItems.forEach(function (d) { d.open = open; });
+    syncRulesBtn();
+  });
+  ruleItems.forEach(function (d) { d.addEventListener("toggle", syncRulesBtn); });
+  syncRulesBtn();
 
   // Giriş hatası geri dönüşle gelirse pencerede göster
   (function () {
