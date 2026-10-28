@@ -165,11 +165,10 @@ h2::before { content: ""; display: inline-block; width: 9px; height: 9px; margin
 .rank.top { border-color: var(--purple); background: linear-gradient(135deg, rgba(139,92,246,.18), var(--bg-raised) 60%); box-shadow: 0 0 44px -20px rgba(139,92,246,.7); }
 .rank.top .price { color: var(--purple-soft); }
 .spawn { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
-.spawn li { display: flex; justify-content: space-between; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.spawn li { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); }
 .spawn .price { font-size: 17px; }
 .spawn .nm { display: flex; align-items: center; gap: 14px; min-width: 0; }
-.egg { flex: none; display: block; width: 30px; height: 35px; }
-.egg svg { display: block; width: 100%; height: 100%; shape-rendering: crispEdges; }
+.egg { flex: none; display: block; width: 44px; height: 48px; object-fit: contain; }
 .buy-note { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; padding: 22px 26px; border: 1px solid var(--line); }
 .buy-note p { margin: 0; color: var(--fg-dim); flex: 1 1 280px; }
 
@@ -371,11 +370,11 @@ footer .legal { grid-column: 1 / -1; margin: 8px 0 0; padding-top: 20px; border-
         <div>
           <h3>Spawnerlar</h3>
           <ul class="spawn">
-            <li><span class="nm"><i class="egg" data-b="#c9c9c9" data-s="#4a4a4a"></i>İskelet Spawner</span><span class="price">20<small>TL</small></span></li>
-            <li><span class="nm"><i class="egg" data-b="#2fb82b" data-s="#0b0b0b"></i>Creeper Spawner</span><span class="price">20<small>TL</small></span></li>
-            <li><span class="nm"><i class="egg" data-b="#f2a7a3" data-s="#d8605b"></i>Domuz Spawner</span><span class="price">20<small>TL</small></span></li>
-            <li><span class="nm"><i class="egg" data-b="#f6b201" data-s="#fff04d"></i>Blaze Spawner</span><span class="price">20<small>TL</small></span></li>
-            <li><span class="nm"><i class="egg" data-b="#4a3a28" data-s="#b5b5b5"></i>İnek Spawner</span><span class="price">20<small>TL</small></span></li>
+            <li><span class="nm"><img class="egg" src="egg-skeleton.png" alt="" width="44" height="48" loading="lazy" decoding="async">İskelet Spawner</span><span class="price">20<small>TL</small></span></li>
+            <li><span class="nm"><img class="egg" src="egg-creeper.png" alt="" width="44" height="48" loading="lazy" decoding="async">Creeper Spawner</span><span class="price">20<small>TL</small></span></li>
+            <li><span class="nm"><img class="egg" src="egg-pig.png" alt="" width="44" height="48" loading="lazy" decoding="async">Domuz Spawner</span><span class="price">20<small>TL</small></span></li>
+            <li><span class="nm"><img class="egg" src="egg-blaze.png" alt="" width="44" height="48" loading="lazy" decoding="async">Blaze Spawner</span><span class="price">20<small>TL</small></span></li>
+            <li><span class="nm"><img class="egg" src="egg-cow.png" alt="" width="44" height="48" loading="lazy" decoding="async">İnek Spawner</span><span class="price">20<small>TL</small></span></li>
           </ul>
         </div>
       </div>
@@ -601,24 +600,6 @@ footer .legal { grid-column: 1 / -1; margin: 8px 0 0; padding-top: 20px; border-
 <script>
   // Sunucu IP adresini buraya yaz. Boş bırakılırsa sayfada "IP adresi yakında" görünür.
   var SERVER_IP = "";
-
-  // Spawner yumurtaları: iki renkten üretilen küçük piksel yumurta
-  var EGG = [
-    "....bbbb....", "...bbbbbb...", "..bbbsbbbb..", "..bbssbbbb..",
-    ".bbbbbbbsbb.", ".bbsbbbbssb.", ".bbbbbbbbbb.", ".bbbbsbbbbb.",
-    ".bsbbssbbbb.", ".bbbbbbbbsb.", ".bbbbbbbbbb.", "..bbbbbbbb..",
-    "...bbbbbb...", "....bbbb...."
-  ];
-  document.querySelectorAll(".egg").forEach(function (el) {
-    var c = { b: el.dataset.b, s: el.dataset.s }, rects = "";
-    EGG.forEach(function (row, y) {
-      for (var x = 0; x < row.length; x++) {
-        var ch = row[x];
-        if (ch !== ".") rects += '<rect x="' + x + '" y="' + y + '" width="1" height="1" fill="' + c[ch] + '"/>';
-      }
-    });
-    el.innerHTML = '<svg viewBox="0 0 12 14" aria-hidden="true">' + rects + "</svg>";
-  });
 
   // Telefon menüsü
   var menuBtn = document.getElementById("menu-btn");
