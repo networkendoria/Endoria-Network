@@ -229,19 +229,46 @@ a.c:hover { border-color: var(--purple); box-shadow: 0 14px 40px -18px rgba(139,
 #login-open .nm { max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .modal-actions { display: grid; gap: 12px; margin-top: 24px; }
 .modal-note { margin: 14px 0 0; color: #e58a8a; font-size: 14px; }
-.modal-box.wide { width: min(100%, 460px); max-height: calc(100% - 8px); display: flex; flex-direction: column; text-align: left; padding: 60px 24px 24px; }
-.members-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+.modal-fine { margin: -14px 0 24px; color: var(--fg-dim); font-size: 13px; line-height: 1.6; }
+.modal-box.wide { width: min(100%, 520px); max-height: calc(100% - 8px); display: flex; flex-direction: column; text-align: left; padding: 28px 24px 22px; }
+.members-head { display: flex; align-items: center; gap: 14px; margin: 0 56px 18px 0; }
 .members-head h3 { font-size: clamp(20px, 5vw, 26px); }
-.members-head span { color: var(--fg-dim); font-size: 14px; }
+.count-pill { padding: 4px 12px; border: 1px solid var(--purple-deep); background: rgba(139,92,246,.1); color: var(--purple-soft); font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.members-search { width: 100%; margin-bottom: 14px; padding: 12px 14px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); font: 500 15px var(--font-body); border-radius: 0; -webkit-appearance: none; appearance: none; }
+.members-search::placeholder { color: var(--fg-dim); }
+.members-search:focus { border-color: var(--purple); outline: none; box-shadow: 0 0 0 3px rgba(139,92,246,.25); }
 #members-status { margin: 4px 0 16px; color: var(--fg-dim); }
-#members-list { list-style: none; margin: 0; padding: 0; overflow-y: auto; min-height: 0; border-top: 1px solid var(--line); }
-.member-row { display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); min-width: 0; }
-.member-row b { min-width: 0; overflow-wrap: anywhere; font-weight: 600; }
-.member-row em { flex: none; font-style: normal; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--purple-soft); border: 1px solid var(--purple-deep); padding: 2px 6px; }
-.member-row small { flex: none; margin-left: auto; color: var(--fg-dim); font-size: 12px; white-space: nowrap; }
-.m-av { flex: none; width: 40px; height: 40px; display: grid; place-items: center; overflow: hidden; border: 1px solid var(--purple); background: rgba(139,92,246,.1); color: var(--purple-soft); font-weight: 700; }
+#members-list { list-style: none; margin: 0; padding: 0; overflow-y: auto; min-height: 0; flex: 1 1 auto; border-top: 1px solid var(--line); overscroll-behavior: contain; }
+.member-row { display: flex; align-items: center; gap: 14px; padding: 12px 8px; border-bottom: 1px solid var(--line); min-width: 0; }
+.member-row.me { background: linear-gradient(90deg, rgba(139,92,246,.14), transparent 80%); }
+.member-row.off { opacity: .6; }
+.m-info { min-width: 0; display: grid; gap: 2px; }
+.m-name { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.m-name b { min-width: 0; overflow-wrap: anywhere; font-weight: 600; }
+.m-name em { flex: none; font-style: normal; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--purple-soft); border: 1px solid var(--purple-deep); padding: 2px 6px; }
+.m-info small { color: var(--fg-dim); font-size: 12.5px; }
+.m-av { flex: none; width: 44px; height: 44px; display: grid; place-items: center; overflow: hidden; border: 1px solid var(--purple); background: rgba(139,92,246,.1); color: var(--purple-soft); font-weight: 700; }
 .m-av img { width: 100%; height: 100%; object-fit: cover; }
-.members-foot { margin-top: 18px; }
+.member-row.skel .m-av, .member-row.skel i { background: #16161d; border-color: var(--line); }
+.member-row.skel i { display: block; height: 12px; width: 140px; max-width: 100%; animation: shimmer 1.4s ease-in-out infinite alternate; }
+.member-row.skel .m-av { animation: shimmer 1.4s ease-in-out infinite alternate; }
+@keyframes shimmer { from { opacity: .45; } to { opacity: 1; } }
+.members-foot { margin-top: 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; }
+.members-note { margin: 0; flex: 1 1 220px; color: var(--fg-dim); font-size: 12.5px; line-height: 1.6; }
+
+/* Discord takviye kartı */
+.boost { display: grid; grid-template-columns: 1.1fr .9fr; gap: 32px 48px; align-items: center; margin-bottom: 16px; padding: 34px; border: 1px solid var(--purple-deep); background: linear-gradient(135deg, rgba(139,92,246,.14), var(--bg-raised) 58%); }
+.boost > * { min-width: 0; }
+.boost-copy .eyebrow { margin-bottom: 12px; }
+.boost h3 { margin: 0 0 12px; font-family: var(--font-display); font-weight: 700; font-size: clamp(18px, 2.6vw, 24px); letter-spacing: .06em; text-transform: uppercase; }
+.boost-copy p:not(.eyebrow) { margin: 0 0 22px; color: var(--fg-dim); max-width: 52ch; }
+.stat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.stat { padding: 16px 18px; border: 1px solid var(--line); background: rgba(7,7,10,.55); }
+.stat b { display: block; font-family: var(--font-display); font-size: clamp(20px, 3vw, 28px); font-variant-numeric: tabular-nums; line-height: 1.2; }
+.stat span { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--purple-soft); font-weight: 600; }
+.meter { margin-top: 18px; height: 8px; background: #16161d; border: 1px solid var(--line); overflow: hidden; }
+.meter i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--btn), var(--purple-soft)); box-shadow: 0 0 14px rgba(139,92,246,.7); transition: width .8s ease; }
+.meter-text { margin: 10px 0 0; color: var(--fg-dim); font-size: 14px; }
 .modal-x { position: absolute; top: 12px; right: 12px; width: 40px; height: 40px; display: grid; place-items: center; background: transparent; border: 1px solid var(--line); color: var(--fg-dim); cursor: pointer; transition: color .2s, border-color .2s; }
 .modal-x:hover { color: var(--fg); border-color: var(--purple-soft); }
 
@@ -257,6 +284,7 @@ footer .legal { grid-column: 1 / -1; margin: 8px 0 0; padding-top: 20px; border-
   .hero-art { order: -1; justify-self: start; width: min(44%, 170px); }
   .store { grid-template-columns: 1fr; gap: 40px; }
   .contact { grid-template-columns: 1fr; }
+  .boost { grid-template-columns: 1fr; padding: 26px 22px; }
   section { padding-block: 64px; }
 }
 @media (max-width: 620px) {
@@ -268,6 +296,8 @@ footer .legal { grid-column: 1 / -1; margin: 8px 0 0; padding-top: 20px; border-
   .ip-row .btn { width: 100%; }
   footer .wrap { grid-template-columns: 1fr; }
   .modal-box { padding: 60px 20px 44px; }
+  .modal-box.wide { padding: 22px 16px 18px; }
+  .members-head { margin-right: 52px; }
   .ip { width: 100%; justify-content: space-between; }
   .rank { padding: 20px; }
 }
@@ -534,6 +564,24 @@ footer .legal { grid-column: 1 / -1; margin: 8px 0 0; padding-top: 20px; border-
         <h2>İletişim</h2>
         <p>Soru, öneri veya satın alım için bize ulaş.</p>
       </div>
+      <div class="boost" id="boost">
+        <div class="boost-copy">
+          <p class="eyebrow">Discord Topluluğu</p>
+          <h3>Sunucuya takviye yap</h3>
+          <p>Takviye yapınca Discord'da takviye rozeti alırsın ve sunucunun yeni özelliklerinin açılmasına yardım edersin. Discord'a gir, sunucumuzun menüsünden takviye seçeneğini bul.</p>
+          <a class="btn" href="https://discord.gg/8kB8bu6dHQ" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 2l8 7-8 13L4 9z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 9h16M9 9l3 13M15 9l-3 13" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>Discord'a Git ve Takviye Yap</a>
+        </div>
+        <div class="boost-stats" id="boost-stats" hidden>
+          <div class="stat-grid">
+            <div class="stat"><b id="st-boosts"></b><span>Takviye</span></div>
+            <div class="stat"><b id="st-level"></b><span>Seviye</span></div>
+            <div class="stat"><b id="st-members"></b><span>Üye</span></div>
+            <div class="stat"><b id="st-online"></b><span>Çevrimiçi</span></div>
+          </div>
+          <div class="meter" id="meter" role="progressbar" aria-label="Sonraki takviye seviyesine ilerleme" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden><i id="meter-fill"></i></div>
+          <p class="meter-text" id="meter-text" hidden></p>
+        </div>
+      </div>
       <div class="contact">
         <a class="c" href="https://discord.gg/8kB8bu6dHQ" target="_blank" rel="noopener">
           <small>Discord</small><b>discord.gg/8kB8bu6dHQ</b><em>En hızlı yol</em>
@@ -562,6 +610,7 @@ footer .legal { grid-column: 1 / -1; margin: 8px 0 0; padding-top: 20px; border-
     <div id="login-signin" hidden>
       <h3>Hoş geldin</h3>
       <p class="modal-text">Discord hesabınla tek tıkla giriş yap. Şifre istemiyoruz.</p>
+      <p class="modal-fine">Giriş yapınca Discord adın ve fotoğrafın üye listesine eklenir. Liste yalnızca giriş yapan üyelere görünür, istersen kendini gizleyebilirsin.</p>
       <button class="btn modal-btn" id="discord-login" type="button">Discord ile Giriş Yap</button>
       <p class="modal-note" id="login-note" hidden></p>
     </div>
@@ -569,7 +618,6 @@ footer .legal { grid-column: 1 / -1; margin: 8px 0 0; padding-top: 20px; border-
       <div class="modal-user"><img id="acc-avatar" alt="" hidden><b id="acc-name"></b></div>
       <div class="modal-actions">
         <button class="btn modal-btn" id="members-open" type="button">Üye Listesi</button>
-        <button class="btn ghost modal-btn" id="join-btn" type="button">Kendini Listeye Ekle</button>
         <button class="btn ghost modal-btn" id="logout-btn" type="button">Çıkış Yap</button>
       </div>
       <p class="modal-note" id="acc-note" hidden></p>
@@ -582,10 +630,14 @@ footer .legal { grid-column: 1 / -1; margin: 8px 0 0; padding-top: 20px; border-
     <button class="modal-x" id="members-close" type="button" aria-label="Kapat">
       <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2" stroke-linecap="square" fill="none"/></svg>
     </button>
-    <div class="members-head"><h3 id="members-title">Üyeler</h3><span id="members-count"></span></div>
+    <div class="members-head"><h3 id="members-title">Üyeler</h3><span class="count-pill" id="members-count" hidden></span></div>
+    <input class="members-search" id="members-search" type="search" placeholder="Üye ara" aria-label="Üye ara" autocomplete="off">
     <p id="members-status" hidden></p>
     <ul id="members-list"></ul>
-    <div class="members-foot"><button class="btn ghost modal-btn" id="members-join" type="button">Kendini Listeye Ekle</button></div>
+    <div class="members-foot">
+      <p class="members-note">Adın ve fotoğrafın yalnızca giriş yapan üyelere görünür.</p>
+      <button class="btn ghost small" id="members-vis" type="button" hidden>Listeden gizle</button>
+    </div>
   </div>
 </div>
 
@@ -641,7 +693,7 @@ footer .legal { grid-column: 1 / -1; margin: 8px 0 0; padding-top: 20px; border-
   function showView(name) { Object.keys(views).forEach(function (k) { views[k].hidden = k !== name; }); }
 
   function renderUser(user) {
-    if (!user) { currentUser = null; isMember = false; closeMembers(); openBtn.innerHTML = loginIcon; showView("signin"); return; }
+    if (!user) { currentUser = null; closeMembers(); openBtn.innerHTML = loginIcon; showView("signin"); return; }
     var m = user.user_metadata || {};
     var name = m.custom_claims && m.custom_claims.global_name || m.full_name || m.name || m.user_name || "Oyuncu";
     var avatar = typeof m.avatar_url === "string" && m.avatar_url.indexOf("https://") === 0 ? m.avatar_url : "";
@@ -654,7 +706,7 @@ footer .legal { grid-column: 1 / -1; margin: 8px 0 0; padding-top: 20px; border-
     var big = document.getElementById("acc-avatar");
     if (avatar) { big.src = avatar; big.hidden = false; } else { big.hidden = true; }
     showView("account");
-    refreshMembership();
+    autoJoin();
   }
 
   if (SUPABASE_URL && SUPABASE_ANON_KEY) {
@@ -676,84 +728,146 @@ footer .legal { grid-column: 1 / -1; margin: 8px 0 0; padding-top: 20px; border-
     });
   }
 
-  // Üye listesi (yalnızca giriş yapanlar görür)
-  var currentUser = null, currentName = "", currentAvatar = "", isMember = false;
+  // Üye listesi: giriş yapan herkes otomatik eklenir, liste yalnızca giriş yapanlara görünür.
+  var currentUser = null, currentName = "", currentAvatar = "", isVisible = true, canHide = false, membersData = [];
   var mModal = document.getElementById("members-modal");
   var mList = document.getElementById("members-list");
   var mStatus = document.getElementById("members-status");
   var mCount = document.getElementById("members-count");
-  var joinBtn = document.getElementById("join-btn");
-  var mJoin = document.getElementById("members-join");
-  var accNote = document.getElementById("acc-note");
+  var mSearch = document.getElementById("members-search");
+  var visBtn = document.getElementById("members-vis");
 
-  function setMember(v) {
-    isMember = v;
-    var t = v ? "Listeden Çık" : "Kendini Listeye Ekle";
-    joinBtn.textContent = t; mJoin.textContent = t;
-  }
-  function refreshMembership() {
+  function updateVisBtn() { visBtn.hidden = !canHide; visBtn.textContent = isVisible ? "Listeden gizle" : "Listede görün"; }
+  function autoJoin() {
     if (!sb || !currentUser) return;
-    sb.from("members").select("user_id").eq("user_id", currentUser.id).maybeSingle().then(function (r) {
-      if (!r.error) setMember(!!r.data);
+    sb.from("members").upsert({ user_id: currentUser.id, name: currentName.slice(0, 40), avatar_url: currentAvatar || null }).then(function (r) {
+      if (r.error) return;
+      sb.from("members").select("visible").eq("user_id", currentUser.id).maybeSingle().then(function (v) {
+        if (v.error) { canHide = false; } else { canHide = true; isVisible = !(v.data && v.data.visible === false); }
+        updateVisBtn();
+      });
+    });
+  }
+  function ago(iso) {
+    var t = new Date(iso).getTime();
+    if (isNaN(t)) return "";
+    var s = Math.max(0, (Date.now() - t) / 1000);
+    if (s < 60) return "az önce";
+    if (s < 3600) return Math.floor(s / 60) + " dk önce";
+    if (s < 86400) return Math.floor(s / 3600) + " saat önce";
+    if (s < 2592000) return Math.floor(s / 86400) + " gün önce";
+    return new Date(t).toLocaleDateString("tr-TR", { day: "numeric", month: "short", year: "numeric" });
+  }
+  function isMe(m) { return !!currentUser && m.user_id === currentUser.id; }
+  function renderMembers() {
+    var q = mSearch.value.trim().toLocaleLowerCase("tr");
+    var rows = membersData.filter(function (m) { return !q || String(m.name || "").toLocaleLowerCase("tr").indexOf(q) !== -1; });
+    rows.sort(function (a, b) { return (isMe(b) ? 1 : 0) - (isMe(a) ? 1 : 0); });
+    mList.textContent = "";
+    if (!rows.length) {
+      mStatus.hidden = false;
+      mStatus.textContent = q ? "Aramayla eşleşen üye yok." : "Listede henüz kimse yok.";
+      return;
+    }
+    mStatus.hidden = true;
+    rows.forEach(function (m) {
+      var li = document.createElement("li");
+      li.className = "member-row" + (isMe(m) ? " me" : "") + (m.visible === false ? " off" : "");
+      var av = document.createElement("span"); av.className = "m-av";
+      if (typeof m.avatar_url === "string" && m.avatar_url.indexOf("https://cdn.discordapp.com/") === 0) {
+        var im = document.createElement("img"); im.src = m.avatar_url; im.alt = ""; im.width = 44; im.height = 44; im.loading = "lazy"; av.appendChild(im);
+      } else { av.textContent = String(m.name || "?").charAt(0).toLocaleUpperCase("tr"); }
+      var info = document.createElement("div"); info.className = "m-info";
+      var top = document.createElement("div"); top.className = "m-name";
+      var nm = document.createElement("b"); nm.textContent = m.name || "Oyuncu"; top.appendChild(nm);
+      if (isMe(m)) { var you = document.createElement("em"); you.textContent = "Sen"; top.appendChild(you); }
+      if (m.visible === false) { var hid = document.createElement("em"); hid.textContent = "Gizli"; top.appendChild(hid); }
+      var d = document.createElement("small"); d.textContent = "Katıldı · " + ago(m.joined_at);
+      d.title = new Date(m.joined_at).toLocaleString("tr-TR");
+      info.appendChild(top); info.appendChild(d);
+      li.appendChild(av); li.appendChild(info);
+      mList.appendChild(li);
     });
   }
   function loadMembers() {
-    mStatus.hidden = false; mStatus.textContent = "Yükleniyor..."; mCount.textContent = ""; mList.textContent = "";
-    sb.from("members").select("user_id,name,avatar_url,joined_at").order("joined_at", { ascending: false }).limit(200).then(function (r) {
-      if (r.error) { mStatus.textContent = "Üye listesi şu an açılamıyor. Biraz sonra tekrar dene."; return; }
-      var rows = r.data || [];
-      mCount.textContent = rows.length + " üye";
-      mStatus.hidden = rows.length > 0;
-      if (!rows.length) mStatus.textContent = "Listede henüz kimse yok. İlk sen ol!";
-      rows.forEach(function (m) {
-        var li = document.createElement("li"); li.className = "member-row";
-        var av = document.createElement("span"); av.className = "m-av";
-        if (typeof m.avatar_url === "string" && m.avatar_url.indexOf("https://cdn.discordapp.com/") === 0) {
-          var im = document.createElement("img"); im.src = m.avatar_url; im.alt = ""; av.appendChild(im);
-        } else { av.textContent = String(m.name || "?").charAt(0).toUpperCase(); }
-        var nm = document.createElement("b"); nm.textContent = m.name || "Oyuncu";
-        li.appendChild(av); li.appendChild(nm);
-        if (currentUser && m.user_id === currentUser.id) { var you = document.createElement("em"); you.textContent = "Sen"; li.appendChild(you); }
-        var d = document.createElement("small");
-        d.textContent = new Date(m.joined_at).toLocaleDateString("tr-TR", { day: "numeric", month: "short", year: "numeric" });
-        li.appendChild(d);
-        mList.appendChild(li);
-      });
+    mStatus.hidden = true; mCount.hidden = true; mList.textContent = "";
+    for (var i = 0; i < 4; i++) {
+      var sk = document.createElement("li"); sk.className = "member-row skel"; sk.setAttribute("aria-hidden", "true");
+      sk.innerHTML = '<span class="m-av"></span><i></i>'; mList.appendChild(sk);
+    }
+    var cols = canHide ? "user_id,name,avatar_url,joined_at,visible" : "user_id,name,avatar_url,joined_at";
+    sb.from("members").select(cols).order("joined_at", { ascending: false }).limit(300).then(function (r) {
+      mList.textContent = "";
+      if (r.error) { mStatus.hidden = false; mStatus.textContent = "Üye listesi şu an açılamıyor. Biraz sonra tekrar dene."; return; }
+      membersData = r.data || [];
+      var shown = membersData.filter(function (m) { return m.visible !== false; }).length;
+      mCount.textContent = shown + " üye"; mCount.hidden = false;
+      renderMembers();
     });
   }
   function openMembers() {
     if (!sb || !currentUser) return;
     document.getElementById("login-modal").hidden = true;
-    mModal.hidden = false; loadMembers();
+    mSearch.value = ""; mModal.hidden = false; loadMembers();
     document.getElementById("members-close").focus();
   }
   function closeMembers() { mModal.hidden = true; }
-  function toggleMembership() {
+  visBtn.addEventListener("click", function () {
     if (!sb || !currentUser) return;
-    var btns = [joinBtn, mJoin];
-    btns.forEach(function (b) { b.disabled = true; });
-    accNote.hidden = true;
-    var req = isMember
-      ? sb.from("members").delete().eq("user_id", currentUser.id)
-      : sb.from("members").upsert({ user_id: currentUser.id, name: currentName.slice(0, 40), avatar_url: currentAvatar || null });
-    req.then(function (r) {
-      btns.forEach(function (b) { b.disabled = false; });
-      if (r.error) {
-        accNote.textContent = "İşlem yapılamadı. Biraz sonra tekrar dene.";
-        accNote.hidden = false;
-        if (!mModal.hidden) { mStatus.hidden = false; mStatus.textContent = "İşlem yapılamadı. Biraz sonra tekrar dene."; }
-        return;
-      }
-      setMember(!isMember);
-      if (mModal.hidden) openMembers(); else loadMembers();
+    visBtn.disabled = true;
+    sb.from("members").update({ visible: !isVisible }).eq("user_id", currentUser.id).then(function (r) {
+      visBtn.disabled = false;
+      if (r.error) { mStatus.hidden = false; mStatus.textContent = "İşlem yapılamadı. Biraz sonra tekrar dene."; return; }
+      isVisible = !isVisible; updateVisBtn(); loadMembers();
     });
-  }
+  });
+  mSearch.addEventListener("input", renderMembers);
   document.getElementById("members-open").addEventListener("click", openMembers);
-  joinBtn.addEventListener("click", toggleMembership);
-  mJoin.addEventListener("click", toggleMembership);
   document.getElementById("members-close").addEventListener("click", closeMembers);
   mModal.addEventListener("click", function (e) { if (e.target === mModal) closeMembers(); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !mModal.hidden) closeMembers(); });
+
+  // Discord topluluğu: üye, çevrimiçi ve takviye sayıları (Discord'un herkese açık davet bilgisinden).
+  // Bilgi alınamazsa istatistik kutusu gizli kalır, hiçbir sayı uydurulmaz.
+  var DISCORD_CODE = "8kB8bu6dHQ";
+  var BOOST_STEPS = [2, 7, 14];
+  function numOrNull(v) { return typeof v === "number" && isFinite(v) ? v : null; }
+  function setStat(id, v) {
+    var el = document.getElementById(id);
+    el.parentNode.hidden = v === null;
+    el.textContent = v === null ? "" : v.toLocaleString("tr-TR");
+  }
+  function renderDiscord(d) {
+    var g = (d && d.guild) || {};
+    var boosts = numOrNull(g.premium_subscription_count);
+    var members = numOrNull(d && d.approximate_member_count);
+    var online = numOrNull(d && d.approximate_presence_count);
+    var level = boosts === null ? null : BOOST_STEPS.filter(function (n) { return boosts >= n; }).length;
+    setStat("st-boosts", boosts); setStat("st-level", level); setStat("st-members", members); setStat("st-online", online);
+    var meter = document.getElementById("meter"), text = document.getElementById("meter-text");
+    meter.hidden = text.hidden = boosts === null;
+    if (boosts !== null) {
+      var pct = 100, msg = "En yüksek seviyeye ulaştık. Takviyen için teşekkürler!";
+      if (level < BOOST_STEPS.length) {
+        var prev = level ? BOOST_STEPS[level - 1] : 0, next = BOOST_STEPS[level];
+        pct = Math.round(((boosts - prev) / (next - prev)) * 100);
+        msg = (boosts === 0 ? "İlk takviyeyi sen yap. " : "") + "Seviye " + (level + 1) + " için " + (next - boosts) + " takviye " + (boosts === 0 ? "gerekiyor." : "daha gerekiyor.");
+      }
+      document.getElementById("meter-fill").style.width = pct + "%";
+      meter.setAttribute("aria-valuenow", String(pct));
+      text.textContent = msg;
+    }
+    document.getElementById("boost-stats").hidden = [boosts, members, online].every(function (v) { return v === null; });
+  }
+  function loadDiscord() {
+    var ctl = ("AbortController" in window) ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 8000);
+    fetch("https://discord.com/api/v10/invites/" + DISCORD_CODE + "?with_counts=true", ctl ? { signal: ctl.signal } : undefined)
+      .then(function (r) { return r.json(); })
+      .then(function (d) { clearTimeout(timer); renderDiscord(d); })
+      .catch(function () { clearTimeout(timer); });
+  }
+  loadDiscord();
 
   // Giriş penceresi
   var modal = document.getElementById("login-modal");
