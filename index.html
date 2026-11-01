@@ -387,6 +387,16 @@ footer { border-top: 1px solid var(--line); }
 }
 @media (prefers-reduced-motion:reduce) { .hero-art img { animation: none !important; } }
 
+
+/* Logo: gerçek şeffaf arka planlı SVG kullan */
+.brand img,.hero-art img {
+  mix-blend-mode: normal !important;
+  object-fit: contain !important;
+  background: transparent !important;
+}
+.brand img { filter: drop-shadow(0 0 10px rgba(167,139,250,.28)); }
+.hero-art img { filter: drop-shadow(0 18px 36px rgba(120,83,210,.28)); }
+
 </style>
 </head>
 <body>
@@ -398,7 +408,7 @@ footer { border-top: 1px solid var(--line); }
     <div class="left">
       <button class="btn ghost small" id="login-open" type="button"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" fill="none" stroke="currentColor" stroke-width="2"/></svg>Giriş Yap</button>
       <a class="brand" href="#top" aria-label="Endoria Network ana sayfa">
-        <img src="logo.jpg" alt="" width="34" height="34">
+        <img src="logo.svg" alt="" width="34" height="34">
         <span>Endoria</span>
       </a>
     </div>
@@ -448,7 +458,7 @@ footer { border-top: 1px solid var(--line); }
         </div>
       </div>
       <div class="hero-art">
-        <img src="logo.jpg" alt="Endoria Network logosu: daire içinde bir kristal" width="420" height="420" fetchpriority="high">
+        <img src="logo.svg" alt="Endoria Network logosu: daire içinde bir kristal" width="420" height="420" fetchpriority="high">
       </div>
     </div>
   </div>
@@ -694,8 +704,6 @@ footer { border-top: 1px solid var(--line); }
     </div>
     <div id="login-signin" hidden>
       <h3>Hoş geldin</h3>
-      <p class="modal-text">Discord hesabınla tek tıkla giriş yap. Şifre istemiyoruz.</p>
-      <p class="modal-fine">Giriş yapınca Discord adın ve fotoğrafın üye listesine eklenir. Liste yalnızca giriş yapan üyelere görünür, istersen kendini gizleyebilirsin.</p>
       <button class="btn modal-btn" id="discord-login" type="button">Discord ile Giriş Yap</button>
       <p class="modal-note" id="login-note" hidden></p>
     </div>
